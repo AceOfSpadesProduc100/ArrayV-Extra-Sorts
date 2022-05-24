@@ -7,6 +7,7 @@ import io.github.arrayv.sorts.templates.Sort;
 
 public class CubeRootQuickSort extends Sort {
     private static double DELAY = 0.2;
+
     public CubeRootQuickSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
         this.setSortListName("Cube Root Quick");
@@ -26,7 +27,7 @@ public class CubeRootQuickSort extends Sort {
             int root = (int) cbrt(len);
             int newStart = start + root;
             this.sort(arr, start, newStart);
-            int[] pivots = new int[root];
+            int[] pivots = Writes.createExternalArray(root);
             Writes.changeAllocAmount(pivots.length);
             for (int i = 0; i < root; i++)
                 Writes.write(pivots, i, i + start, 0, false, true);
@@ -51,6 +52,7 @@ public class CubeRootQuickSort extends Sort {
                 this.sort(arr, pivots[i - 1] + 1, pivots[i]);
             this.sort(arr, pivots[root - 1] + 1, stop);
             Writes.changeAllocAmount(-pivots.length);
+            Writes.deleteExternalArray(pivots);
         }
     }
 

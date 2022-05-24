@@ -1,7 +1,7 @@
-package io.github.arrayv.sorts.exchange;
+package sorts.exchange;
 
-import io.github.arrayv.main.ArrayVisualizer;
-import io.github.arrayv.sorts.templates.Sort;
+import main.ArrayVisualizer;
+import sorts.templates.Sort;
 
 /*
  *
@@ -33,6 +33,7 @@ final public class MeanQuickSort extends Sort {
         this.setRunAllSortsName("Mean Quick Sort");
         this.setRunSortName("Mean Quick Sort");
         this.setCategory("Exchange Sorts");
+        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);

@@ -10,7 +10,7 @@
 
   <name>ArrayV Extra Sorts Pack</name>
   <description>Extra Sorts Pack for ArrayV</description>
-  <url>https://github.com/Gaming32/ArrayV-Extra-Sorts</url>
+  <url>https://github.com/AceOfSpadesProduc100/ArrayV-Extra-Sorts</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,7 +27,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.github.Gaming32</groupId>
+      <groupId>com.github.AceOfSpadesProduc100</groupId>
       <artifactId>ArrayV</artifactId>
       <version>5a79051745</version>
     </dependency>

@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class ReboundSort extends Sort {
         this.setRunAllSortsName("Rebound Sort");
         this.setRunSortName("Rebound Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);

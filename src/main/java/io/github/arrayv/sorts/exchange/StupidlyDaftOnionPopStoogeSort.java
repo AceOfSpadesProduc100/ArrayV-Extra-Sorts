@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -22,7 +22,6 @@ final public class StupidlyDaftOnionPopStoogeSort extends Sort {
         this.setRunAllSortsName("Stupidly Daft Onion Pop Stooge Sort");
         this.setRunSortName("Stupidly Daft Onion Pop Stooge Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -34,7 +33,8 @@ final public class StupidlyDaftOnionPopStoogeSort extends Sort {
         Writes.recordDepth(depth);
         if ((right - left) + 1 > 1) {
             if (right - left == 1 || !TOGGLE_stable) {
-                if (Reads.compareIndices(array, left, right, 0.005, true) == dir) Writes.swap(array, left, right, 0.01, true, false);
+                if (Reads.compareIndices(array, left, right, 0.005, true) == dir)
+                    Writes.swap(array, left, right, 0.01, true, false);
             }
             if ((right - left) + 1 > 2) {
                 Writes.recursion();

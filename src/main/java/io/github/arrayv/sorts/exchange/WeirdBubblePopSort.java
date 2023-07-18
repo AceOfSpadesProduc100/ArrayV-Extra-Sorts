@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -29,7 +29,6 @@ public final class WeirdBubblePopSort extends Sort {
         this.setRunAllSortsName("Weird Bubble Pop Sort");
         this.setRunSortName("Weird Bubble Popsort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -40,7 +39,7 @@ public final class WeirdBubblePopSort extends Sort {
     public void weirdBubble(int[] array, int a, int b, boolean dir) {
         int cmp = dir ? 1 : -1;
         boolean sorted = false;
-        while(!sorted) {
+        while (!sorted) {
             sorted = true;
             for (int i = a + 1; i < b; i++) {
                 int j = i;

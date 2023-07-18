@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class OptimizedOddEvenSort extends Sort {
         this.setRunAllSortsName("Optimized Odd-Even Sort");
         this.setRunSortName("Optimized Odd-Even Sort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,12 +33,16 @@ final public class OptimizedOddEvenSort extends Sort {
         int count = 0;
         while (i + 1 < currentLength && count < currentLength) {
             count++;
-            if (i > 0) i--;
-            while (Reads.compareIndices(array, i, i + 1, 0.025, true) <= 0 && i + 1 < currentLength) i++;
-            if (i + 1 < currentLength) Writes.swap(array, i, i + 1, 0.075, true, false);
+            if (i > 0)
+                i--;
+            while (Reads.compareIndices(array, i, i + 1, 0.025, true) <= 0 && i + 1 < currentLength)
+                i++;
+            if (i + 1 < currentLength)
+                Writes.swap(array, i, i + 1, 0.075, true, false);
             run = i + 2;
             while (run + 1 < currentLength) {
-                if (Reads.compareIndices(array, run, run + 1, 0.025, true) > 0) Writes.swap(array, run, run + 1, 0.075, true, false);
+                if (Reads.compareIndices(array, run, run + 1, 0.025, true) > 0)
+                    Writes.swap(array, run, run + 1, 0.075, true, false);
                 run += 2;
             }
         }

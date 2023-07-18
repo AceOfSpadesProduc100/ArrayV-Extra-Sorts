@@ -72,10 +72,10 @@ final public class InPlaceMSDRadixSort extends Sort {
 
         for (int i = 0; i < radix; i++) {
             int subMin = i == 0 ? min : indices[i - 1];
+            Writes.deleteExternalArray(indices);
             this.radixMSD(array, length, subMin, indices[i], radix, pow - 1, sleep);
         }
 
-        Writes.changeAllocAmount(-indices.length);
         Writes.deleteExternalArray(indices);
     }
 

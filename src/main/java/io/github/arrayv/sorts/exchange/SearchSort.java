@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class SearchSort extends Sort {
         this.setRunAllSortsName("Search Sort");
         this.setRunSortName("Search Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,8 +33,10 @@ final public class SearchSort extends Sort {
             Highlights.markArray(3, m);
             Highlights.markArray(2, b);
             Delays.sleep(1);
-            if (Reads.compareValues(value, array[m]) < 0) b = m;
-            else a = m + 1;
+            if (Reads.compareValues(value, array[m]) < 0)
+                b = m;
+            else
+                a = m + 1;
         }
         Highlights.clearMark(3);
         return a;
@@ -47,8 +48,10 @@ final public class SearchSort extends Sort {
         while (i + 1 < currentLength) {
             boolean verify = true;
             while (i + 1 < currentLength && verify) {
-                if (Reads.compareIndices(array, i, i + 1, 0.5, true) <= 0) i++;
-                else verify = false;
+                if (Reads.compareIndices(array, i, i + 1, 0.5, true) <= 0)
+                    i++;
+                else
+                    verify = false;
             }
             if (i + 1 < currentLength) {
                 Writes.swap(array, i + 1, binarySearch(array, 0, i, array[i + 1]), 0.5, true, false);

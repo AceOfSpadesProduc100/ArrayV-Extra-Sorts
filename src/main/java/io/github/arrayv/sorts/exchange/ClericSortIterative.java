@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.IterativeClericSorting;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.IterativeClericSorting;
 
 /*
 
@@ -19,7 +19,6 @@ final public class ClericSortIterative extends IterativeClericSorting {
         this.setRunAllSortsName("Iterative Cleric Sort");
         this.setRunSortName("Iterative Clericsort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -36,8 +35,11 @@ final public class ClericSortIterative extends IterativeClericSorting {
     public void runSort(int[] array, int sortLength, int bucketCount) throws Exception {
         this.end = sortLength;
         int n = 1;
-        for(; n < sortLength; n*=2);
+        for (; n < sortLength; n *= 2)
+            ;
         int numberOfSwaps = 0;
-        do numberOfSwaps = clericSortRoutine(array, n, 0.05); while (numberOfSwaps != 0);
+        do
+            numberOfSwaps = clericSortRoutine(array, n, 0.05);
+        while (numberOfSwaps != 0);
     }
 }

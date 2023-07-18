@@ -45,13 +45,16 @@ public final class OptimizedCocktailGrateSort extends Sort {
 					if (Atesti < left) {
 						Abound--;
 						Atesti = Aright;
-						if (Abound < Aright) Ahigherval = true;
+						if (Abound < Aright)
+							Ahigherval = true;
 					} else {
 						Highlights.markArray(1, Atesti);
 						Highlights.markArray(2, Abound);
 						Delays.sleep(0.125);
-						if (Reads.compareValues(array[Atesti], array[Abound]) > 0) Ahigherval = true;
-						else Atesti--;
+						if (Reads.compareIndices(array, Atesti, Abound, 0.5, true) > 0)
+							Ahigherval = true;
+						else
+							Atesti--;
 					}
 				}
 			}
@@ -61,8 +64,9 @@ public final class OptimizedCocktailGrateSort extends Sort {
 					Highlights.markArray(1, i);
 					Highlights.markArray(2, j);
 					Delays.sleep(0.125);
-					if (Reads.compareValues(array[i], array[j]) > 0) {
-						if (sorted) Afirstswap = i;
+					if (Reads.compareIndices(array, i, j, 0.5, true) > 0) {
+						if (sorted)
+							Afirstswap = i;
 						Alastswap = i;
 						sorted = false;
 						Writes.swap(array, i, j, 0.125, true, false);
@@ -75,15 +79,17 @@ public final class OptimizedCocktailGrateSort extends Sort {
 			Ahigherval = false;
 			left = Afirstswap;
 			Aright = Alastswap + 1;
-			if (sorted) break;
+			if (sorted)
+				break;
 			sorted = true;
 			for (int i = left; i < Bbound; i++) {
 				for (int j = i + 1; j <= Bbound; j++) {
 					Highlights.markArray(1, i);
 					Highlights.markArray(2, j);
 					Delays.sleep(0.125);
-					if (Reads.compareValues(array[i], array[j]) > 0) {
-						if (sorted) Bfirstswap = i;
+					if (Reads.compareIndices(array, i, j, 0.5, true) > 0) {
+						if (sorted)
+							Bfirstswap = i;
 						Blastswap = i;
 						sorted = false;
 						Writes.swap(array, i, j, 0.125, true, false);

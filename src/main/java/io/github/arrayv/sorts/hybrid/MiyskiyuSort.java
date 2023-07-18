@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.insert.InsertionSort;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.insert.InsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
 
 /**
  * @author yuji
@@ -16,7 +16,7 @@ public final class MiyskiyuSort extends Sort {
         setRunAllSortsName("Miyskiyu Sort");
         setRunSortName("Miyskiyusort");
         setCategory("Hybrid Sorts");
-        setComparisonBased(true);
+
         setBucketSort(false);
         setRadixSort(false);
         setUnreasonablySlow(false);

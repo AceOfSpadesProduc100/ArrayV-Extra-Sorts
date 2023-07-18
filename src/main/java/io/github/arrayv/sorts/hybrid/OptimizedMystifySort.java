@@ -1,7 +1,7 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class OptimizedMystifySort extends Sort {
         this.setRunAllSortsName("Optimized Mystify Sort");
         this.setRunSortName("Optimized Mystifysort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -52,7 +51,8 @@ final public class OptimizedMystifySort extends Sort {
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer < 2) return 2;
+        if (answer < 2)
+            return 2;
         return answer;
     }
 
@@ -61,19 +61,23 @@ final public class OptimizedMystifySort extends Sort {
         int effectivelen = currentLength;
         effectivelen -= effectivelen % base;
         int size = 1;
-        while (size <= effectivelen) size *= base;
+        while (size <= effectivelen)
+            size *= base;
         size /= base;
         int initsize = size;
         boolean verify = false;
         while (size > base && !verify) {
             size /= base;
             int gap = initsize;
-            while (gap > size) shellPass(array, effectivelen, gap /= base);
+            while (gap > size)
+                shellPass(array, effectivelen, gap /= base);
             int verifyi = size - 1;
             verify = true;
             while (verifyi < currentLength && verify) {
-                if (Reads.compareIndices(array, verifyi, verifyi + 1, 0.25, true) <= 0) verifyi++;
-                else verify = false;
+                if (Reads.compareIndices(array, verifyi, verifyi + 1, 0.25, true) <= 0)
+                    verifyi++;
+                else
+                    verify = false;
             }
             if (size != 1 && !verify) {
                 int[] pieces = Writes.createExternalArray(effectivelen);
@@ -92,7 +96,8 @@ final public class OptimizedMystifySort extends Sort {
         }
         if (!verify) {
             int gap = initsize;
-            while (gap > 1) shellPass(array, currentLength, gap /= base);
+            while (gap > 1)
+                shellPass(array, currentLength, gap /= base);
         }
     }
 }

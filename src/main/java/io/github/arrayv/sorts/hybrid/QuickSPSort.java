@@ -19,7 +19,8 @@ final public class QuickSPSort extends GrailSorting {
     }
 
     private void compSwap(int[] array, int a, int b) {
-        a--; b--;
+        a--;
+        b--;
         if (Reads.compareIndices(array, a, b, 0.0125, true) > 0) {
             Writes.swap(array, a, b, 0.0125, true, false);
         }
@@ -27,7 +28,7 @@ final public class QuickSPSort extends GrailSorting {
 
     private void ipMerge(int[] array, int a, int m, int b) {
         int len1 = m - a, len2 = b - m;
-        this.grailMergeWithoutBuffer(array, a, len1, len2);
+        this.grailLazyMerge(array, a, len1, len2);
     }
 
     private void quickSPSort2(int[] array, int l, int r) {
@@ -37,10 +38,9 @@ final public class QuickSPSort extends GrailSorting {
                     compSwap(array, i, j);
                 }
             }
-        }
-        else {
+        } else {
             int rb, min, j;
-            rb = l + (int)Math.ceil(Math.sqrt(1 + (r - l)));
+            rb = l + (int) Math.ceil(Math.sqrt(1 + (r - l)));
             for (int i = l; i <= rb; i++) {
                 for (j = i; j <= r; j++) {
                     compSwap(array, i, j);

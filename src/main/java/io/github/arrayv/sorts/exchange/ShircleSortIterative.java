@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.IterativeShircleSorting;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.IterativeShircleSorting;
 
 /*
 
@@ -19,7 +19,6 @@ final public class ShircleSortIterative extends IterativeShircleSorting {
         this.setRunAllSortsName("Iterative Shircle Sort");
         this.setRunSortName("Iterative Shirclesort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -36,8 +35,11 @@ final public class ShircleSortIterative extends IterativeShircleSorting {
     public void runSort(int[] array, int sortLength, int bucketCount) throws Exception {
         end = sortLength;
         int n = 1;
-        for(; n < sortLength; n*=2);
+        for (; n < sortLength; n *= 2)
+            ;
         int numberOfSwaps = 0;
-        do numberOfSwaps = shircleSortRoutine(array, n, 0.01); while (numberOfSwaps != 0);
+        do
+            numberOfSwaps = shircleSortRoutine(array, n, 0.01);
+        while (numberOfSwaps != 0);
     }
 }

@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class OptimizedShoveSort extends Sort {
         this.setRunAllSortsName("Optimized Shove Sort");
         this.setRunSortName("Optimized Shove Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -36,19 +35,21 @@ final public class OptimizedShoveSort extends Sort {
             Highlights.markArray(1, left - 1);
             Highlights.markArray(2, left);
             Delays.sleep(0.0125);
-            if (Reads.compareValues(array[left - 1], array[left]) > 0) {
+            if (Reads.compareIndices(array, left - 1, left, 0.5, true) > 0) {
                 pull = left;
                 while (pull < currentLength) {
                     Writes.swap(array, pull - 1, pull, 0.0125, true, false);
                     pull++;
                 }
-                if (left > 1) left--;
+                if (left > 1)
+                    left--;
                 running++;
                 if (running >= currentLength - left) {
                     Writes.reversal(array, left, currentLength - 1, 1.25, true, false);
                     running = 0;
                 }
-            } else left++;
+            } else
+                left++;
         }
     }
 }

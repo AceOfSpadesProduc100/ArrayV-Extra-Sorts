@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class StableForwardRunShoveSort extends Sort {
         this.setRunAllSortsName("Stable Forward Run Shove Sort");
         this.setRunSortName("Stable Forward Run Shove Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -38,13 +37,15 @@ final public class StableForwardRunShoveSort extends Sort {
                 Highlights.markArray(1, left - 1);
                 Highlights.markArray(2, right - 1);
                 Delays.sleep(0.0125);
-                if (Reads.compareValues(array[left - 1], array[right - 1]) > 0) {
+                if (Reads.compareIndices(array, left - 1, right - 1, 0.5, true) > 0) {
                     pull = left;
                     while (pull < right) {
-                        if (Reads.compareValues(array[pull - 1], array[pull]) != 0) Writes.swap(array, pull - 1, pull, 0.0125, true, false);
+                        if (Reads.compareIndices(array, pull - 1, pull, 0.5, true) != 0)
+                            Writes.swap(array, pull - 1, pull, 0.0125, true, false);
                         pull++;
                     }
-                } else right--;
+                } else
+                    right--;
             }
             left++;
         }

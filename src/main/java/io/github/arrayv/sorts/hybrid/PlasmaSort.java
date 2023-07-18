@@ -1,9 +1,9 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.insert.InsertionSort;
-import sorts.templates.Sort;
-import utils.Rotations;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.insert.InsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.utils.Rotations;
 
 /*
  *
@@ -35,6 +35,7 @@ final public class PlasmaSort extends Sort {
     int[] keys;
 
     private InsertionSort insertSorter;
+
     public PlasmaSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
 
@@ -42,7 +43,6 @@ final public class PlasmaSort extends Sort {
         this.setRunAllSortsName("Plasma Sort");
         this.setRunSortName("Plasmasort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -76,12 +76,10 @@ final public class PlasmaSort extends Sort {
 
                 if (comp < 0) {
                     h = m;
-                }
-                else if (comp == 0) {
+                } else if (comp == 0) {
                     badCount++;
                     break;
-                }
-                else {
+                } else {
                     l = m + 1;
                 }
             }
@@ -106,8 +104,7 @@ final public class PlasmaSort extends Sort {
             // item has to go into position lo
             int j = compindex - 1;
 
-            while (j >= l)
-            {
+            while (j >= l) {
                 Writes.write(array, j + 1, array[j], 1, true, false);
                 j--;
             }
@@ -131,7 +128,8 @@ final public class PlasmaSort extends Sort {
 
     private static int getBufferSize(int length) {
         int size;
-        for (size = 1; size * size < length; size *= 2);
+        for (size = 1; size * size < length; size *= 2)
+            ;
         return size;
     }
 
@@ -153,8 +151,7 @@ final public class PlasmaSort extends Sort {
         while (left < right && right < end) {
             if (Reads.compareIndices(array, bufferPointer, right, 0.1, true) <= 0) {
                 Writes.swap(array, bufferPointer++, left++, 0.25, true, false);
-            }
-            else {
+            } else {
                 Writes.swap(array, left++, right++, 0.25, true, false);
             }
         }
@@ -171,28 +168,29 @@ final public class PlasmaSort extends Sort {
     }
 
     // public void blockSelection(int[] array, int start, int end, int blockSize) {
-    //     for (int i = start; i < end - blockSize; i += blockSize) {
-    //         int lowestindex = i;
-    //         int lowestkey = (lowestindex - start) / blockSize;
+    // for (int i = start; i < end - blockSize; i += blockSize) {
+    // int lowestindex = i;
+    // int lowestkey = (lowestindex - start) / blockSize;
 
-    //         for (int j = i + blockSize; j < end; j += blockSize) {
-    //             int jkey = (j - start) / blockSize;
-    //             Highlights.markArray(2, j);
-    //             Delays.sleep(0.5);
+    // for (int j = i + blockSize; j < end; j += blockSize) {
+    // int jkey = (j - start) / blockSize;
+    // Highlights.markArray(2, j);
+    // Delays.sleep(0.5);
 
-    //             int comp = Reads.compareValues(array[j], array[lowestindex]);
-    //             if (comp == -1 || (comp == 0 && Reads.compareOriginalIndices(keys, jkey, lowestkey, 0.25, true) == -1)) {
-    //                 lowestindex = j;
-    //                 lowestkey = jkey;
-    //                 Highlights.markArray(1, lowestindex);
-    //                 Delays.sleep(0.5);
-    //             }
-    //         }
-    //         if (lowestindex > i) {
-    //             blockSwap(array, i, lowestindex, blockSize);
-    //             Writes.swap(keys, (i - start) / blockSize, lowestkey, 1, true, true);
-    //         }
-    //     }
+    // int comp = Reads.compareIndices(array, j, lowestindex, 0.5, true);
+    // if (comp == -1 || (comp == 0 && Reads.compareOriginalIndices(keys, jkey,
+    // lowestkey, 0.25, true) == -1)) {
+    // lowestindex = j;
+    // lowestkey = jkey;
+    // Highlights.markArray(1, lowestindex);
+    // Delays.sleep(0.5);
+    // }
+    // }
+    // if (lowestindex > i) {
+    // blockSwap(array, i, lowestindex, blockSize);
+    // Writes.swap(keys, (i - start) / blockSize, lowestkey, 1, true, true);
+    // }
+    // }
     // }
 
     private void mergeOverBuffer(int[] array, int bufferSize, int start, int mid, int end, int keySize) {
@@ -212,8 +210,9 @@ final public class PlasmaSort extends Sort {
                 Highlights.markArray(2, j);
                 Delays.sleep(0.5);
 
-                int comp = Reads.compareValues(array[j], array[lowestindex]);
-                if (comp == -1 || (comp == 0 && Reads.compareOriginalIndices(keys, jkey, lowestkey, 0.25, true) == -1)) {
+                int comp = Reads.compareIndices(array, j, lowestindex, 0.5, true);
+                if (comp == -1
+                        || (comp == 0 && Reads.compareOriginalIndices(keys, jkey, lowestkey, 0.25, true) == -1)) {
                     lowestindex = j;
                     lowestkey = jkey;
                     Highlights.markArray(1, lowestindex);
@@ -227,22 +226,27 @@ final public class PlasmaSort extends Sort {
             if (ikey > 0) {
                 if (Reads.compareIndices(array, i - 1, i, 0.5, true) > 0) {
                     int keyIndex = (i - start) / blockSize;
-                    mergeUnderBuffer(array, bufferSize, i - blockSize, i, i + blockSize, keys[keyIndex - 1] > midKey && keys[keyIndex - 1] > keys[keyIndex]);
+                    mergeUnderBuffer(array, bufferSize, i - blockSize, i, i + blockSize,
+                            keys[keyIndex - 1] > midKey && keys[keyIndex - 1] > keys[keyIndex]);
                 }
             }
         }
         int keyIndex = keySize - 1;
-        mergeUnderBuffer(array, bufferSize, i - blockSize, i, i + blockSize, keys[keyIndex - 1] > midKey && keys[keyIndex - 1] > keys[keyIndex]);
+        mergeUnderBuffer(array, bufferSize, i - blockSize, i, i + blockSize,
+                keys[keyIndex - 1] > midKey && keys[keyIndex - 1] > keys[keyIndex]);
 
         // int checkStart = start;
         // while (checkStart < end - blockSize) {
-        //     if (Reads.compareIndices(array, checkStart + blockSize - 1, checkStart + blockSize, 1, true) == 1) {
-        //         int keyIndex = (checkStart - start) / blockSize;
-        //         // int keyIndex2 = (checkStart + blockSize - start) / blockSize;
-        //         // Highlights.markArray(1, keyIndex);
-        //         mergeUnderBuffer(array, bufferSize, checkStart, checkStart + blockSize, checkStart + 2 * blockSize, Reads.compareOriginalValues(keys[keyIndex], keys[keyIndex + 1]) == 1);
-        //     }
-        //     checkStart += blockSize;
+        // if (Reads.compareIndices(array, checkStart + blockSize - 1, checkStart +
+        // blockSize, 1, true) == 1) {
+        // int keyIndex = (checkStart - start) / blockSize;
+        // // int keyIndex2 = (checkStart + blockSize - start) / blockSize;
+        // // Highlights.markArray(1, keyIndex);
+        // mergeUnderBuffer(array, bufferSize, checkStart, checkStart + blockSize,
+        // checkStart + 2 * blockSize, Reads.compareOriginalValues(keys[keyIndex],
+        // keys[keyIndex + 1]) == 1);
+        // }
+        // checkStart += blockSize;
         // }
     }
 

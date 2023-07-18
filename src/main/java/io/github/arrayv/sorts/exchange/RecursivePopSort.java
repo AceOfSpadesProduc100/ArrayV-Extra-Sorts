@@ -1,10 +1,9 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
-public final class RecursivePopSort extends Sort
-{
+public final class RecursivePopSort extends Sort {
     private int[] arr;
 
     public RecursivePopSort(final ArrayVisualizer arrayVisualizer) {
@@ -13,7 +12,6 @@ public final class RecursivePopSort extends Sort
         this.setRunAllSortsName("Recursive Pop Sort");
         this.setRunSortName("Recursive Pop Sort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -41,8 +39,7 @@ public final class RecursivePopSort extends Sort
                         }
                         --right;
                     }
-                }
-                else {
+                } else {
                     while (right > start && this.compare(start, right) == 1) {
                         --right;
                     }

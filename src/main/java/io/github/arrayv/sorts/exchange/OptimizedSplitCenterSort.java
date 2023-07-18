@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class OptimizedSplitCenterSort extends Sort {
         this.setRunAllSortsName("Optimized Split Center Sort");
         this.setRunSortName("Optimized Split Center Sort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -45,8 +44,10 @@ final public class OptimizedSplitCenterSort extends Sort {
                 i += way;
             }
             way *= -1;
-            if (!anyswaps) swapless++;
-            else swapless = 0;
+            if (!anyswaps)
+                swapless++;
+            else
+                swapless = 0;
             runs++;
         }
     }

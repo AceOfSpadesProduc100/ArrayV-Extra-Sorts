@@ -37,7 +37,7 @@ public final class FloatSort extends Sort {
                 this.Highlights.markArray(1, i);
                 this.Highlights.markArray(2, j);
 
-                while (i >= 0 && this.Reads.compareValues(array[i], array[j]) > 0) {
+                while (i >= 0 && this.Reads.compareIndices(array, i, j, 0.5, true) > 0) {
                     this.Writes.swap(array, i, j, 0.5D, true, false);
                     sorted = false;
                     i--;
@@ -49,7 +49,7 @@ public final class FloatSort extends Sort {
                 if (i >= 0) {
                     i++;
                     j++;
-                    while (j < length && this.Reads.compareValues(array[i], array[j]) > 0) {
+                    while (j < length && this.Reads.compareIndices(array, i, j, 0.5, true) > 0) {
                         this.Writes.swap(array, i, j, 0.5D, true, false);
                         sorted = false;
                         i++;

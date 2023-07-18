@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
-import utils.IndexedRotations;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.utils.IndexedRotations;
 
 public final class LaziceSort extends Sort {
 
@@ -12,7 +12,6 @@ public final class LaziceSort extends Sort {
         this.setRunAllSortsName("Lazice Stable Sort");
         this.setRunSortName("Lazice Sort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -53,7 +52,7 @@ public final class LaziceSort extends Sort {
     protected void inPlaceMergeFW(int[] array, int a, int m, int b) {
         int i = a, j = m, k;
         while (i < j && j < b)
-            if (Reads.compareValues(array[i], array[j]) > 0) {
+            if (Reads.compareIndices(array, i, j, 0.5, true) > 0) {
                 k = leftBinSearch(array, j + 1, b, array[i]);
                 rotate(array, i, j, k);
                 i += k - j;
@@ -65,7 +64,7 @@ public final class LaziceSort extends Sort {
     protected void inPlaceMergeBW(int[] array, int a, int m, int b) {
         int i = m - 1, j = b - 1, k;
         while (j > i && i >= a)
-            if (Reads.compareValues(array[i], array[j]) > 0) {
+            if (Reads.compareIndices(array, i, j, 0.5, true) > 0) {
                 k = rightBinSearch(array, a, i, array[j]);
                 rotate(array, k, i + 1, j + 1);
                 j -= (i + 1) - k;

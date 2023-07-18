@@ -2,20 +2,18 @@
 // Decompiled by Procyon v0.5.36
 //
 
-package sorts.insert;
+package io.github.arrayv.sorts.insert;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
-public final class AdaptiveSquareInsertionSort extends Sort
-{
+public final class AdaptiveSquareInsertionSort extends Sort {
     public AdaptiveSquareInsertionSort(final ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
         this.setSortListName("Adaptive Square Insert");
         this.setRunAllSortsName("Adaptive Square Insertion Sort");
         this.setRunSortName("Adaptive Square Insertsort");
         this.setCategory("Insertion Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -27,10 +25,11 @@ public final class AdaptiveSquareInsertionSort extends Sort
         return b <= c && b >= a;
     }
 
-    public void binaryInsertSort(final int[] array, final int start, final int end, final double compSleep, final double writeSleep, final boolean direction) {
+    public void binaryInsertSort(final int[] array, final int start, final int end, final double compSleep,
+            final double writeSleep, final boolean direction) {
         int x = start;
         if (this.Reads.compareIndices(array, x, x + 1, compSleep, true) >= 0) {
-            while (this.Reads.compareValues(array[x + 1], array[x]) < 0 && x < end) {
+            while (this.Reads.compareIndices(array, x + 1, x, 0.5, true) < 0 && x < end) {
                 ++x;
             }
             this.Writes.reversal(array, start, x, writeSleep, true, false);
@@ -44,10 +43,9 @@ public final class AdaptiveSquareInsertionSort extends Sort
                 while (lo < hi) {
                     int mid = (hi - lo) / 2 + lo;
                     if (dir) {
-                        mid = (int)Math.sqrt(hi * lo);
-                    }
-                    else {
-                        mid = (int)(hi - (Math.sqrt(hi * lo) - lo));
+                        mid = (int) Math.sqrt(hi * lo);
+                    } else {
+                        mid = (int) (hi - (Math.sqrt(hi * lo) - lo));
                     }
                     this.Highlights.markArray(1, lo);
                     this.Highlights.markArray(2, mid);
@@ -56,8 +54,7 @@ public final class AdaptiveSquareInsertionSort extends Sort
                     if (this.Reads.compareValues(num, array[mid]) < 0) {
                         hi = mid;
                         dir = true;
-                    }
-                    else {
+                    } else {
                         lo = mid + 1;
                         dir = false;
                     }

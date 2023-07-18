@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class RougeSpacePopSort extends Sort {
         this.setRunAllSortsName("Rouge-Space Pop Sort");
         this.setRunSortName("Rouge-Space Pop Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -33,17 +32,21 @@ final public class RougeSpacePopSort extends Sort {
         int f = 1;
         boolean a = false;
         for (int j = end - 1; j > 0; j -= c) {
-            if (f - 1 < start) s = start;
-            else s = f - 1;
+            if (f - 1 < start)
+                s = start;
+            else
+                s = f - 1;
             a = false;
             c = 1;
             for (int i = s; i < j; i++) {
                 if (Reads.compareIndices(array, i, i + 1, 0.005, true) == dir) {
                     Writes.swap(array, i, i + 1, 0.015, true, false);
-                    if (!a) f = i;
+                    if (!a)
+                        f = i;
                     a = true;
                     c = 1;
-                } else c++;
+                } else
+                    c++;
             }
         }
     }

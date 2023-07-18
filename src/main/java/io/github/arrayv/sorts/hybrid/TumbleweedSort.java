@@ -40,13 +40,15 @@ final public class TumbleweedSort extends Sort {
                 Highlights.markArray(1, left - 1);
                 Highlights.markArray(2, right - 1);
                 Delays.sleep(0.005);
-                if (Reads.compareValues(array[left - 1], array[right - 1]) < 1) {
-                    if (lowesthigh == left) lowesthigh = right;
+                if (Reads.compareIndices(array, left - 1, right - 1, 0.5, true) < 1) {
+                    if (lowesthigh == left)
+                        lowesthigh = right;
                     else {
                         Highlights.markArray(1, lowesthigh - 1);
                         Highlights.markArray(2, right - 1);
                         Delays.sleep(0.005);
-                        if (Reads.compareValues(array[lowesthigh - 1], array[right - 1]) > 0) lowesthigh = right;
+                        if (Reads.compareIndices(array, lowesthigh - 1, right - 1, 0.5, true) > 0)
+                            lowesthigh = right;
                     }
                 }
                 right++;
@@ -65,10 +67,13 @@ final public class TumbleweedSort extends Sort {
                         Highlights.markArray(1, left - 1);
                         Highlights.markArray(2, right - 1);
                         Delays.sleep(0.005);
-                        if (Reads.compareValues(array[left - 1], array[right - 1]) == 1) anyless = true;
-                        else right++;
+                        if (Reads.compareIndices(array, left - 1, right - 1, 0.5, true) == 1)
+                            anyless = true;
+                        else
+                            right++;
                     }
-                    if (!anyless) left++;
+                    if (!anyless)
+                        left++;
                     else {
                         while (pull + 1 <= currentLength) {
                             Writes.swap(array, pull - 1, pull, 0.005, true, false);

@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class OptimizedWhy2Sort extends Sort {
         this.setRunAllSortsName("Optimized Why Sort 2");
         this.setRunSortName("Optimized Why Sort 2");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -31,18 +30,23 @@ final public class OptimizedWhy2Sort extends Sort {
     protected int globalpdir = 1;
 
     protected void stableSegmentReversal(int[] array, int start, int end) {
-        if (end - start < 3) Writes.swap(array, start, end, 0.001, true, false);
-        else Writes.reversal(array, start, end, 0.001, true, false);
+        if (end - start < 3)
+            Writes.swap(array, start, end, 0.001, true, false);
+        else
+            Writes.reversal(array, start, end, 0.001, true, false);
         int i = start;
         int left;
         int right;
         while (i < end) {
             left = i;
-            while (Reads.compareIndices(array, i, i + 1, 0.001, true) == 0 && i < end) i++;
+            while (Reads.compareIndices(array, i, i + 1, 0.001, true) == 0 && i < end)
+                i++;
             right = i;
             if (left != right) {
-                if (right - left < 3) Writes.swap(array, left, right, 0.001, true, false);
-                else Writes.reversal(array, left, right, 0.001, true, false);
+                if (right - left < 3)
+                    Writes.swap(array, left, right, 0.001, true, false);
+                else
+                    Writes.reversal(array, left, right, 0.001, true, false);
             }
             i++;
         }
@@ -52,24 +56,34 @@ final public class OptimizedWhy2Sort extends Sort {
         if (dir * globalpdir == 1) {
             int r = start + ((end - start) / 2) - 1;
             int cmp = 0;
-            if (r + 1 < end) cmp = Reads.compareIndices(array, r, r + 1, 0.001, true);
+            if (r + 1 < end)
+                cmp = Reads.compareIndices(array, r, r + 1, 0.001, true);
             while (r + 1 < end) {
                 if (cmp == dir || cmp == 0) {
                     r++;
-                    if (cmp == 0) lessunique = true;
-                    if (r + 1 < end) cmp = Reads.compareIndices(array, r, r + 1, 1, r + 1 < end);
-                } else break;
+                    if (cmp == 0)
+                        lessunique = true;
+                    if (r + 1 < end)
+                        cmp = Reads.compareIndices(array, r, r + 1, 1, r + 1 < end);
+                } else
+                    break;
             }
-            if (lessunique) stableSegmentReversal(array, start, r);
+            if (lessunique)
+                stableSegmentReversal(array, start, r);
             else {
-                if (r - start > 2) Writes.reversal(array, start, r, 0.001, true, false);
-                else if (r - start > 0) Writes.swap(array, start, r, 0.001, true, false);
+                if (r - start > 2)
+                    Writes.reversal(array, start, r, 0.001, true, false);
+                else if (r - start > 0)
+                    Writes.swap(array, start, r, 0.001, true, false);
             }
         } else {
-            if (lessunique) stableSegmentReversal(array, start + ((end - start) / 2), end - 1);
+            if (lessunique)
+                stableSegmentReversal(array, start + ((end - start) / 2), end - 1);
             else {
-                if (end - start > 4) Writes.reversal(array, start + ((end - start) / 2), end - 1, 0.001, true, false);
-                else if (end - start > 2) Writes.swap(array, start + ((end - start) / 2), end - 1, 0.001, true, false);
+                if (end - start > 4)
+                    Writes.reversal(array, start + ((end - start) / 2), end - 1, 0.001, true, false);
+                else if (end - start > 2)
+                    Writes.swap(array, start + ((end - start) / 2), end - 1, 0.001, true, false);
             }
         }
         int c = 1;
@@ -77,20 +91,24 @@ final public class OptimizedWhy2Sort extends Sort {
         int f = start;
         boolean a = false;
         for (int j = end - 1; j > start; j -= c) {
-            if (f - 1 < start) s = start;
-            else s = f - 1;
+            if (f - 1 < start)
+                s = start;
+            else
+                s = f - 1;
             a = false;
             c = 1;
             for (int i = s; i < j; i++) {
                 int cmp = Reads.compareIndices(array, i, i + 1, 0.001, true);
                 if (cmp == dir) {
                     Writes.swap(array, i, i + 1, 0.001, true, false);
-                    if (!a) f = i;
+                    if (!a)
+                        f = i;
                     a = true;
                     c = 1;
                 } else {
                     c++;
-                    if (cmp == 0) lessunique = true;
+                    if (cmp == 0)
+                        lessunique = true;
                 }
             }
         }
@@ -108,13 +126,15 @@ final public class OptimizedWhy2Sort extends Sort {
             while (index + len <= end) {
                 if (len == 2) {
                     int cmp = Reads.compareIndices(array, index, index + 1, 0.001, true);
-                    if (cmp == dir * pdir) Writes.swap(array, index, index + 1, 0.001, true, false);
-                    else if (cmp == 0) lessunique = true;
+                    if (cmp == dir * pdir)
+                        Writes.swap(array, index, index + 1, 0.001, true, false);
+                    else if (cmp == 0)
+                        lessunique = true;
                 } else if (itr < 20) {
                     Writes.recursion();
                     method(array, index, index + len, pdir, itr + 1);
-                }
-                else pd(array, index, index + len, dir * pdir);
+                } else
+                    pd(array, index, index + len, dir * pdir);
                 index += len;
                 dir *= -1;
             }
@@ -122,16 +142,16 @@ final public class OptimizedWhy2Sort extends Sort {
                 if (itr < 20) {
                     Writes.recursion();
                     method(array, index, end, dir * pdir, itr + 1);
-                }
-                else pd(array, index, end, dir * pdir);
+                } else
+                    pd(array, index, end, dir * pdir);
             }
             len *= 2;
         }
         if (itr < 20) {
             Writes.recursion();
             method(array, start, end, pdir, itr + 1);
-        }
-        else pd(array, start, end, pdir);
+        } else
+            pd(array, start, end, pdir);
     }
 
     @Override
@@ -145,13 +165,17 @@ final public class OptimizedWhy2Sort extends Sort {
             while (index + len <= currentLength) {
                 if (len == 2) {
                     int cmp = Reads.compareIndices(array, index, index + 1, 0.001, true);
-                    if (cmp == dir) Writes.swap(array, index, index + 1, 0.001, true, false);
-                    else if (cmp == 0) lessunique = true;
-                } else method(array, index, index + len, dir, 1);
+                    if (cmp == dir)
+                        Writes.swap(array, index, index + 1, 0.001, true, false);
+                    else if (cmp == 0)
+                        lessunique = true;
+                } else
+                    method(array, index, index + len, dir, 1);
                 index += len;
                 dir *= -1;
             }
-            if (index != currentLength) method(array, index, currentLength, dir, 1);
+            if (index != currentLength)
+                method(array, index, currentLength, dir, 1);
             len *= 2;
         }
         method(array, 0, currentLength, 1, 1);

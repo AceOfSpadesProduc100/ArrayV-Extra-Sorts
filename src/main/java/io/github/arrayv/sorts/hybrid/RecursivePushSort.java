@@ -1,7 +1,7 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class RecursivePushSort extends Sort {
         this.setRunAllSortsName("Recursive Push Sort");
         this.setRunSortName("Recursive Pushsort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -37,15 +36,18 @@ final public class RecursivePushSort extends Sort {
             Highlights.markArray(1, i - 1);
             Highlights.markArray(2, (i - 1) + gap);
             Delays.sleep(0.01);
-            if (Reads.compareValues(array[i - 1], array[i + gap - 1]) > 0) {
-                if (!anyswaps) first = i;
+            if (Reads.compareIndices(array, i - 1, i + gap - 1, 0.5, true) > 0) {
+                if (!anyswaps)
+                    first = i;
                 anyswaps = true;
                 Highlights.clearMark(2);
                 int item = array[i + gap - 1];
-                for (int j = gap; j > 0; j--) Writes.write(array, i + j - 1, array[i + j - 2], 0.01, true, false);
+                for (int j = gap; j > 0; j--)
+                    Writes.write(array, i + j - 1, array[i + j - 2], 0.01, true, false);
                 Writes.write(array, i - 1, item, 0.01, true, false);
                 gap++;
-            } else i++;
+            } else
+                i++;
         }
         if (anyswaps) {
             if (end - i > 1) {
@@ -65,7 +67,7 @@ final public class RecursivePushSort extends Sort {
             Highlights.markArray(1, i);
             Highlights.markArray(2, i + 1);
             Delays.sleep(0.25);
-            if (Reads.compareValues(array[i], array[i + 1]) > 0) {
+            if (Reads.compareIndices(array, i, i + 1, 0.5, true) > 0) {
                 check = i;
                 break;
             }
@@ -80,8 +82,10 @@ final public class RecursivePushSort extends Sort {
             Highlights.markArray(3, m);
             Highlights.markArray(2, b);
             Delays.sleep(1);
-            if (Reads.compareValues(value, array[m]) < 0) b = m;
-            else a = m + 1;
+            if (Reads.compareValues(value, array[m]) < 0)
+                b = m;
+            else
+                a = m + 1;
         }
         Highlights.clearMark(3);
         return a;
@@ -89,12 +93,13 @@ final public class RecursivePushSort extends Sort {
 
     protected void binsert(int[] array, int start, int currentLength) {
         for (int i = start; i < currentLength; i++) {
-            if (Reads.compareValues(array[i - 1], array[i]) > 0) {
+            if (Reads.compareIndices(array, i - 1, i, 0.5, true) > 0) {
                 int item = array[i];
                 int left = binarySearch(array, 0, i - 1, item);
                 Highlights.clearAllMarks();
                 Highlights.markArray(2, left);
-                for (int right = i; right > left; right--) Writes.write(array, right, array[right - 1], 0.05, true, false);
+                for (int right = i; right > left; right--)
+                    Writes.write(array, right, array[right - 1], 0.05, true, false);
                 Writes.write(array, left, item, 0.05, true, false);
                 Highlights.clearAllMarks();
             } else {

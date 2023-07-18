@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 final public class SemiStoogeSort extends Sort {
     public SemiStoogeSort(ArrayVisualizer arrayVisualizer) {
@@ -11,7 +11,6 @@ final public class SemiStoogeSort extends Sort {
         this.setRunAllSortsName("Semi-Stooge Sort");
         this.setRunSortName("Semi-Stoogesort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -36,14 +35,14 @@ final public class SemiStoogeSort extends Sort {
             Highlights.markArray(4, i + t);
             Writes.recordDepth(d++);
 
-            Writes.recursion(2);
-            this.semiStoogeSort(A, i, j-t, d);
-            this.semiStoogeSort(A, i+t, j, d);
+            Writes.recursion();
+            this.semiStoogeSort(A, i, j - t, d);
+            this.semiStoogeSort(A, i + t, j, d);
         }
     }
 
     private void demiStoogeSort(int[] A, int i, int j, int d) {
-        if(i >= j)
+        if (i >= j)
             return;
 
         Delays.sleep(0.0025);
@@ -57,18 +56,18 @@ final public class SemiStoogeSort extends Sort {
             Highlights.markArray(3, i + h);
             Writes.recordDepth(d++);
 
-            Writes.recursion(2);
-            this.demiStoogeSort(A, i+h, j, d);
-            this.demiStoogeSort(A, i, i+h-1, d);
+            Writes.recursion();
+            this.demiStoogeSort(A, i + h, j, d);
+            this.demiStoogeSort(A, i, i + h - 1, d);
         }
-        if(j - i + 1 >= 3) {
+        if (j - i + 1 >= 3) {
             int t = (j - i + 1) / 3;
 
             Writes.recordDepth(d++);
 
-            Writes.recursion(2);
-            this.demiStoogeSort(A, i, j-t, d);
-            this.demiStoogeSort(A, i+t, j, d);
+            Writes.recursion();
+            this.demiStoogeSort(A, i, j - t, d);
+            this.demiStoogeSort(A, i + t, j, d);
         }
         this.semiStoogeSort(A, i, j, d);
     }

@@ -1,7 +1,7 @@
-package sorts.bogo;
+package io.github.arrayv.sorts.bogo;
 
-import main.ArrayVisualizer;
-import sorts.templates.BogoSorting;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.BogoSorting;
 
 /**
  * Bozosort randomly swaps any two elements until the array is sorted.
@@ -13,8 +13,7 @@ public final class BozoSort extends BogoSorting {
         this.setSortListName("Bozo");
         this.setRunAllSortsName("Bozo Sort");
         this.setRunSortName("Bozosort");
-        this.setCategory("Bogo Sorts");
-        this.setComparisonBased(true);
+        this.setCategory("Impractical Sorts");
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);

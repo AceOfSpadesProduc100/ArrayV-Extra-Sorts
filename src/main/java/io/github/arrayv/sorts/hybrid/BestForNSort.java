@@ -1,9 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.merge.QuadSort;
-import sorts.templates.BestForNSorting;
-import utils.Statistics;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.merge.QuadSort;
+import io.github.arrayv.sorts.templates.BestForNSorting;
 
 /*
 
@@ -24,7 +23,6 @@ final public class BestForNSort extends BestForNSorting {
         this.setRunAllSortsName("Best For N Sort");
         this.setRunSortName("Best For N Sort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,21 +32,20 @@ final public class BestForNSort extends BestForNSorting {
     }
 
     public void bestN(int[] array, int s, int l, int b) {
-        Statistics.putStat("Network Use");
         int j;
         for (j = s; j + b <= s + l; j += b) {
-            Statistics.addStat("Network Use");
             initNetwork(array, j, b);
         }
         int ends = l - j;
-        Statistics.addStat("Network Use");
         initNetwork(array, j, ends);
-        if (l > b) quad.runSort(array, l, 0);
+        if (l > b)
+            quad.runSort(array, l, 0);
     }
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer > 64) return 64;
+        if (answer > 64)
+            return 64;
         return answer;
     }
 

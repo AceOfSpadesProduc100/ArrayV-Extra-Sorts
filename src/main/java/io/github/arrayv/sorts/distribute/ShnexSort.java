@@ -1,7 +1,7 @@
-package sorts.distribute;
+package io.github.arrayv.sorts.distribute;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,33 +19,37 @@ public final class ShnexSort extends Sort {
         this.setRunAllSortsName("Shnex Sort");
         this.setRunSortName("Shnex Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
         this.setUnreasonableLimit(32);
         this.setBogoSort(false);
     }
-    
+
     protected int stablereturn(int a) {
         return arrayVisualizer.doingStabilityCheck() ? arrayVisualizer.getStabilityValue(a) : a;
     }
-    
-    // Entirely cheating, like the par function, but this does what it needs to do in O(n) time.
+
+    // Entirely cheating, like the par function, but this does what it needs to do
+    // in O(n) time.
     protected boolean noDupes(int[] array, int len) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < len; i++) {
-            if (stablereturn(array[i]) < min) min = stablereturn(array[i]);
-            if (stablereturn(array[i]) > max) max = stablereturn(array[i]);
+            if (stablereturn(array[i]) < min)
+                min = stablereturn(array[i]);
+            if (stablereturn(array[i]) > max)
+                max = stablereturn(array[i]);
         }
-        if (min != 0 || max != len - 1) return false;
+        if (min != 0 || max != len - 1)
+            return false;
         int size = max - min + 1;
         int[] holes = new int[size];
         for (int x = 0; x < len; x++) {
             if (holes[stablereturn(array[x]) - min] == 1) {
                 return false;
-            } else holes[stablereturn(array[x]) - min] = 1;
+            } else
+                holes[stablereturn(array[x]) - min] = 1;
         }
         return true;
     }

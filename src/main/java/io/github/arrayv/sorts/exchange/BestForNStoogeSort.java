@@ -1,8 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.BestForNSorting;
-import utils.Statistics;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.BestForNSorting;
 
 /*
 
@@ -23,7 +22,6 @@ final public class BestForNStoogeSort extends BestForNSorting {
         this.setRunAllSortsName("Best For N Stooge Sort");
         this.setRunSortName("Best For N Stooge Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -35,17 +33,11 @@ final public class BestForNStoogeSort extends BestForNSorting {
     protected void bestNStooge(int[] array, int s, int l, int depth) {
         Writes.recordDepth(depth);
         if (l <= 2 * maxtouse) {
-            Statistics.addStat("Network Use");
             initNetwork(array, s, l / 2);
-            Statistics.addStat("Network Use");
             initNetwork(array, s + l / 2, l / 2);
-            Statistics.addStat("Network Use");
             initNetwork(array, s + l / 4, l / 2);
-            Statistics.addStat("Network Use");
             initNetwork(array, s, l / 2);
-            Statistics.addStat("Network Use");
             initNetwork(array, s + l / 2, l / 2);
-            Statistics.addStat("Network Use");
             initNetwork(array, s + l / 4, l / 2);
         } else {
             Writes.recursion();
@@ -65,14 +57,13 @@ final public class BestForNStoogeSort extends BestForNSorting {
 
     public void bestNStoogeMain(int[] array, int start, int length, int base, int depth, double del) {
         delay = del;
-        Statistics.putStat("Network Use");
         Writes.recordDepth(depth);
         if (length <= maxtouse) {
-            Statistics.addStat("Network Use");
             initNetwork(array, start, length);
         } else {
             int effectivelen = base;
-            while (effectivelen <= length) effectivelen *= 2;
+            while (effectivelen <= length)
+                effectivelen *= 2;
             effectivelen /= 2;
             bestNStooge(array, start, effectivelen, depth);
             if (effectivelen != length) {
@@ -88,9 +79,12 @@ final public class BestForNStoogeSort extends BestForNSorting {
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer % 2 == 1) answer++;
-        if (answer < 2) return 2;
-        if (answer > 64) return 64;
+        if (answer % 2 == 1)
+            answer++;
+        if (answer < 2)
+            return 2;
+        if (answer > 64)
+            return 64;
         return answer;
     }
 

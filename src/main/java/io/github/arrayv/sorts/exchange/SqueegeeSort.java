@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 final public class SqueegeeSort extends Sort {
     public SqueegeeSort(ArrayVisualizer arrayVisualizer) {
@@ -11,7 +11,6 @@ final public class SqueegeeSort extends Sort {
         this.setRunAllSortsName("Squeegee Sort");
         this.setRunSortName("Squeegeesort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -36,14 +35,14 @@ final public class SqueegeeSort extends Sort {
             Highlights.markArray(4, i + t);
             Writes.recordDepth(d++);
 
-            Writes.recursion(3);
-            this.stoogeSort(A, i, j-t, d);
-            this.stoogeSort(A, i+2*t, j, d);
-            this.stoogeSort(A, i, j-t, d);
-            if(j-i+1 > 3) {
-                Writes.recursion(2);
-                this.stoogeSort(A, j-2*t, j, d);
-                this.stoogeSort(A, i, j-t, d);
+            Writes.recursion();
+            this.stoogeSort(A, i, j - t, d);
+            this.stoogeSort(A, i + 2 * t, j, d);
+            this.stoogeSort(A, i, j - t, d);
+            if (j - i + 1 > 3) {
+                Writes.recursion();
+                this.stoogeSort(A, j - 2 * t, j, d);
+                this.stoogeSort(A, i, j - t, d);
             }
         }
         if (Reads.compareValues(A[i], A[j]) == 1) {

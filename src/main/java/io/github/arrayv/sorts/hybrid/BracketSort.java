@@ -1,7 +1,7 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 final public class BracketSort extends Sort {
     final static int NULL_VALUE = -1;
@@ -22,7 +22,6 @@ final public class BracketSort extends Sort {
         this.setRunAllSortsName("Bracket Sort");
         this.setRunSortName("Bracketsort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -95,10 +94,12 @@ final public class BracketSort extends Sort {
             } else {
                 if (Reads.compareIndices(bracket, offset + other, offset + root, 0.5, true) > 0) {
                     Writes.write(bracket, nextOffset + nextRoot, bracket[offset + root], 1, true, true);
-                    Writes.write(origins, nextOffset + nextRoot - length, origins[offset + root - length], 0.5, true, true);
+                    Writes.write(origins, nextOffset + nextRoot - length, origins[offset + root - length], 0.5, true,
+                            true);
                 } else {
                     Writes.write(bracket, nextOffset + nextRoot, bracket[offset + other], 1, true, true);
-                    Writes.write(origins, nextOffset + nextRoot - length, origins[offset + other - length], 0.5, true, true);
+                    Writes.write(origins, nextOffset + nextRoot - length, origins[offset + other - length], 0.5, true,
+                            true);
                 }
             }
             offset = nextOffset;
@@ -110,9 +111,12 @@ final public class BracketSort extends Sort {
 
     protected String formatDebugBracketLen8() {
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format("(%1$s-%2$s) (%3$s-%4$s) (%5$s-%6$s) (%7$s-%8$s)\n", bracket[0] + 1, bracket[1] + 1, bracket[2] + 1, bracket[3] + 1, bracket[4] + 1, bracket[5] + 1, bracket[6] + 1, bracket[7] + 1));
+        builder.append(String.format("(%1$s-%2$s) (%3$s-%4$s) (%5$s-%6$s) (%7$s-%8$s)\n", bracket[0] + 1,
+                bracket[1] + 1, bracket[2] + 1, bracket[3] + 1, bracket[4] + 1, bracket[5] + 1, bracket[6] + 1,
+                bracket[7] + 1));
         builder.append(" |       |     |   |\n");
-        builder.append(String.format("(%1$s-------%2$s)   (%3$s---%4$s)\n", bracket[8] + 1, bracket[9] + 1, bracket[10] + 1, bracket[11] + 1));
+        builder.append(String.format("(%1$s-------%2$s)   (%3$s---%4$s)\n", bracket[8] + 1, bracket[9] + 1,
+                bracket[10] + 1, bracket[11] + 1));
         builder.append(" |             |\n");
         builder.append(String.format("(%1$s-------------%2$s)\n", bracket[12] + 1, bracket[13] + 1));
         builder.append(" |\n");
@@ -150,6 +154,6 @@ final public class BracketSort extends Sort {
         }
         Writes.write(array, currentLength - 1, bracket[bracketEnd], 1, true, false);
 
-        //Writes.deleteExternalArrays(bracket, origins);
+        // Writes.deleteExternalArrays(bracket, origins);
     }
 }

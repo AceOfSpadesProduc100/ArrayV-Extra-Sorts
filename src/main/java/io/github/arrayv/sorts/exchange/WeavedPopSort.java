@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class WeavedPopSort extends Sort {
         this.setRunAllSortsName("Weaved Pop Sort");
         this.setRunSortName("Weaved Pop Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -59,14 +58,16 @@ final public class WeavedPopSort extends Sort {
             dir *= -1;
             if (start == gap) {
                 start = 0;
-                if (gap == 1) finalized = true;
+                if (gap == 1)
+                    finalized = true;
                 else {
                     gap /= 2;
                     if (gap == 1) {
-                        for (int i = 0, j = currentLength - 2 - (currentLength) % 2; i < j; i += 2, j -= 2) Writes.swap(array, i, j, 1, true, false);
+                        for (int i = 0, j = currentLength - 2 - (currentLength) % 2; i < j; i += 2, j -= 2)
+                            Writes.swap(array, i, j, 1, true, false);
                         dir = 1;
-                    }
-                    else dir = -1;
+                    } else
+                        dir = -1;
                 }
             }
         }

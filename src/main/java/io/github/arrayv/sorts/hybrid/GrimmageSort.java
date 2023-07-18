@@ -1,7 +1,7 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.GrailSorting;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.GrailSorting;
 
 // Image Sorting: Chaos
 final public class GrimmageSort extends GrailSorting {
@@ -12,27 +12,27 @@ final public class GrimmageSort extends GrailSorting {
         this.setRunAllSortsName("Grimmage Sort");
         this.setRunSortName("Grimmage Sort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
         this.setUnreasonableLimit(0);
         this.setBogoSort(false);
     }
+
     // This sort gets part of its name from another sort I made,
     // "Image Sort." It used a really weird method that kind of
     // ties in with this one.
     private int seek(int[] array, int start, int end) {
         int seek = start + 1,
-            direction = Reads.compareValues(array[start], array[start+1]);
-        if(direction == 0)
+                direction = Reads.compareIndices(array, start, start + 1, 0.5, true);
+        if (direction == 0)
             direction = -1;
-        for(int i=start+2; i<end && seek < end - 1; i++) {
-            if(Reads.compareValues(array[seek], array[i]) == direction) {
+        for (int i = start + 2; i < end && seek < end - 1; i++) {
+            if (Reads.compareIndices(array, seek, i, 0.5, true) == direction) {
                 Writes.multiSwap(array, i, ++seek, 0.01, true, false);
             }
         }
-        if(direction == 1) {
+        if (direction == 1) {
             Writes.reversal(array, start, seek, 1, true, false);
         }
         return seek;
@@ -41,11 +41,11 @@ final public class GrimmageSort extends GrailSorting {
     @Override
     public void runSort(int[] array, int sortLength, int bucketCount) {
         int k = 0, runs = 1;
-        while(k < sortLength) {
+        while (k < sortLength) {
             int tempK = k;
             k = this.seek(array, k, sortLength);
-            if(runs > 1) {
-                this.grailMergeWithoutBuffer(array, 0, tempK, k - tempK);
+            if (runs > 1) {
+                this.grailLazyMerge(array, 0, tempK, k - tempK);
             }
             runs++;
         }

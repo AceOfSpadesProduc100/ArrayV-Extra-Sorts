@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class StrangeSort extends Sort {
         this.setRunAllSortsName("Strange Sort");
         this.setRunSortName("Strangesort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -30,7 +29,8 @@ final public class StrangeSort extends Sort {
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer < 2) return 2;
+        if (answer < 2)
+            return 2;
         return answer;
     }
 
@@ -51,12 +51,15 @@ final public class StrangeSort extends Sort {
                     Highlights.markArray(1, (int) (offset + mult / base) - 1);
                     Highlights.markArray(2, (int) (offset + mult) - 1);
                     Delays.sleep(0.1);
-                    if (Reads.compareValues(array[(int) (offset + mult / base) - 1], array[(int) (offset + mult) - 1]) > 0) {
-                        Writes.swap(array, (int) (offset + mult / base) - 1, (int) (offset + mult) - 1, 0.1, true, false);
+                    if (Reads.compareValues(array[(int) (offset + mult / base) - 1],
+                            array[(int) (offset + mult) - 1]) > 0) {
+                        Writes.swap(array, (int) (offset + mult / base) - 1, (int) (offset + mult) - 1, 0.1, true,
+                                false);
                         if (mult == 1 / base) {
                             bound *= base;
                             mult = bound;
-                        } else mult /= base;
+                        } else
+                            mult /= base;
                         anyswaps = true;
                     } else {
                         bound *= base;

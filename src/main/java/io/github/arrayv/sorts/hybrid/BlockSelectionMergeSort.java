@@ -63,7 +63,7 @@ final public class BlockSelectionMergeSort extends Sort {
                 Highlights.markArray(2, j);
                 Delays.sleep(compSleep);
 
-                if (Reads.compareValues(array[j], array[lowestindex]) == -1){
+                if (Reads.compareIndices(array, j, lowestindex, 0.5, true) == -1) {
                     lowestindex = j;
                     Highlights.markArray(1, lowestindex);
                     Delays.sleep(compSleep);
@@ -85,15 +85,16 @@ final public class BlockSelectionMergeSort extends Sort {
     }
 
     private void mergeRun(int[] array, int start, int mid, int end, int minSize) {
-        if(start == mid) return;
+        if (start == mid)
+            return;
 
         if (end - start == minSize) {
             binaryInserter.customBinaryInsert(array, start, end, 0.333);
             return;
         }
 
-        mergeRun(array, start, (mid+start)/2, mid, minSize);
-        mergeRun(array, mid, (mid+end)/2, end, minSize);
+        mergeRun(array, start, (mid + start) / 2, mid, minSize);
+        mergeRun(array, mid, (mid + end) / 2, end, minSize);
 
         merge(array, start, end);
     }
@@ -104,8 +105,8 @@ final public class BlockSelectionMergeSort extends Sort {
         extraMerger = new ReverseLazyStableSort(arrayVisualizer);
 
         Writes.startLap();
-        int minSize = (int)(Math.log(length) / Math.log(2)) / 3 + 2;
-        minSize = (int)Math.pow(2, minSize);
+        int minSize = (int) (Math.log(length) / Math.log(2)) / 3 + 2;
+        minSize = (int) Math.pow(2, minSize);
         Writes.stopLap();
         if (length <= minSize) {
             binaryInserter.customBinaryInsert(array, 0, length, 0.333);
@@ -113,7 +114,7 @@ final public class BlockSelectionMergeSort extends Sort {
         }
 
         Writes.startLap();
-        int useLength = (int)Math.pow(2, Math.floor(Math.log(length) / Math.log(2)));
+        int useLength = (int) Math.pow(2, Math.floor(Math.log(length) / Math.log(2)));
         Writes.stopLap();
 
         int start = length - useLength;

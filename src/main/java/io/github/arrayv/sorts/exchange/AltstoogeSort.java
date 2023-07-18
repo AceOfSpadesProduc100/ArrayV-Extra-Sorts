@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
  * THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE").
@@ -22,7 +22,6 @@ final public class AltstoogeSort extends Sort {
         this.setRunAllSortsName("Altstooge Sort");
         this.setRunSortName("Altstoogesort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -42,11 +41,11 @@ final public class AltstoogeSort extends Sort {
 
         if (j - i + 1 >= 3) {
             int t = (j - i + 1) / 3;
-            int mid = i+t, mid2 = j-t;
+            int mid = i + t, mid2 = j - t;
 
             Highlights.markArray(3, j - t);
             Highlights.markArray(4, i + t);
-            if(!base) {
+            if (!base) {
                 this.stoogeSort(A, mid, mid2, true);
             }
 

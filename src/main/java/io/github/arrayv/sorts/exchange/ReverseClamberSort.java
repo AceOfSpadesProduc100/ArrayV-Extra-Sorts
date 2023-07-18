@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class ReverseClamberSort extends Sort {
         this.setRunAllSortsName("Reverse Clamber Sort");
         this.setRunSortName("Reverse Clambersort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,7 +33,8 @@ final public class ReverseClamberSort extends Sort {
         while (left >= 0) {
             right = currentLength - 1;
             while (right > left) {
-                if (Reads.compareIndices(array, left, right, 0.1, true) > 0) Writes.swap(array, left, right, 0.1, true, false);
+                if (Reads.compareIndices(array, left, right, 0.1, true) > 0)
+                    Writes.swap(array, left, right, 0.1, true, false);
                 right--;
             }
             left--;

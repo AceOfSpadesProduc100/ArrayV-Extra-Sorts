@@ -28,8 +28,8 @@ public final class ReverseGnomeSort extends Sort {
     private void reverseGnomeSort(int[] array, int lowerBound, int upperBound, double sleep) {
         int pos = lowerBound;
 
-        while (pos < upperBound && Reads.compareValues(array[pos], array[pos + 1]) == 1) {
-            Writes.swap(array, pos, pos + 1, sleep, true, false);
+        while (pos < upperBound && Reads.compareIndices(array, pos, pos + 1, sleep, true) == 1) {
+            Writes.swap(array, pos, pos + 1, sleep / 4, true, false);
             pos++;
         }
     }

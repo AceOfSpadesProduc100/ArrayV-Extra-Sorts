@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.insert.PDBinaryInsertionSort;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.insert.PDBinaryInsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -24,7 +24,6 @@ final public class ShockSort extends Sort {
         this.setRunAllSortsName("Shock Sort (Tim)");
         this.setRunSortName("Shocksort (Tim)");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,7 +33,8 @@ final public class ShockSort extends Sort {
 
     protected int pow2lte(int value) {
         int val;
-        for (val = 1; val <= value; val <<= 1);
+        for (val = 1; val <= value; val <<= 1)
+            ;
         return val >> 1;
     }
 
@@ -69,15 +69,20 @@ final public class ShockSort extends Sort {
         int effectivelen = currentLength;
         int size = pow2lte((int) Math.sqrt(effectivelen));
         effectivelen -= effectivelen % size;
-        for (int i = 0; i < effectivelen; i += size) binsert(array, i, i + size);
-        if (effectivelen != currentLength) binsert(array, effectivelen, currentLength);
+        for (int i = 0; i < effectivelen; i += size)
+            binsert(array, i, i + size);
+        if (effectivelen != currentLength)
+            binsert(array, effectivelen, currentLength);
         int gap = effectivelen;
-        while (gap > size) shellPass(array, currentLength, gap /= 2);
+        while (gap > size)
+            shellPass(array, currentLength, gap /= 2);
         int verifyi = size - 1;
         boolean verify = true;
         while (verifyi < currentLength && verify) {
-            if (Reads.compareIndices(array, verifyi, verifyi + 1, 0.25, true) <= 0) verifyi++;
-            else verify = false;
+            if (Reads.compareIndices(array, verifyi, verifyi + 1, 0.25, true) <= 0)
+                verifyi++;
+            else
+                verify = false;
         }
         if (!verify) {
             if (array[verifyi] - array[verifyi + 1] > currentLength / 2) {

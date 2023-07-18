@@ -1,10 +1,10 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 // Replace this with the path of the target algorithm.
-import sorts.distribute.FlightSort;
+import io.github.arrayv.sorts.distribute.FlightSort;
 
 /*
 
@@ -29,7 +29,6 @@ final public class BuildAnInsertionSort extends Sort {
         this.setRunAllSortsName("Build-An-Insertion Sort");
         this.setRunSortName("Build-An-Insertion Sort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -38,8 +37,11 @@ final public class BuildAnInsertionSort extends Sort {
     }
 
     protected void method(int[] array, int len) {
-        try {sort.runSort(array, len, NUMBER_Base);}
-        catch (Exception e) {e.printStackTrace();}
+        try {
+            sort.runSort(array, len, NUMBER_Base);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 final public class GnoomeSort extends Sort {
     public GnoomeSort(ArrayVisualizer arrayVisualizer) {
@@ -11,7 +11,6 @@ final public class GnoomeSort extends Sort {
         this.setRunAllSortsName("Gnoome Sort");
         this.setRunSortName("Gnoomesort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -36,17 +35,18 @@ final public class GnoomeSort extends Sort {
             Highlights.markArray(4, i + t);
             Writes.recordDepth(d++);
 
-            Writes.recursion(5);
-            this.stoogeSort(A, i, j-t, d);
-            this.stoogeSort(A, i, i+t, d);
-            this.stoogeSort(A, i+t, j, d);
-            this.stoogeSort(A, i+t, j-t, d);
-            this.stoogeSort(A, i, i+t, d);
+            Writes.recursion();
+            this.stoogeSort(A, i, j - t, d);
+            this.stoogeSort(A, i, i + t, d);
+            this.stoogeSort(A, i + t, j, d);
+            this.stoogeSort(A, i + t, j - t, d);
+            this.stoogeSort(A, i, i + t, d);
         }
     }
 
     @Override
     public void runSort(int[] array, int currentLength, int bucketCount) {
-        for(int i=1; i<currentLength; i++) this.stoogeSort(array, 0, i, 0);
+        for (int i = 1; i < currentLength; i++)
+            this.stoogeSort(array, 0, i, 0);
     }
 }

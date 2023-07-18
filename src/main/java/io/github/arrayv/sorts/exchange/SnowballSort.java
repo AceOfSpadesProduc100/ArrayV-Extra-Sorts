@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class SnowballSort extends Sort {
         this.setRunAllSortsName("Snowball Sort");
         this.setRunSortName("Snowball Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -35,9 +34,12 @@ final public class SnowballSort extends Sort {
             gap = 1;
             for (int i = begin - 1 > 0 ? begin - 1 : 0; i + gap < currentLength; i++) {
                 if (Reads.compareIndices(array, i, i + gap, 0.001, true) > 0) {
-                    if (gap > 2) Writes.reversal(array, i, i + gap, 0.01, true, false);
-                    else Writes.swap(array, i, i + gap, 0.01, true, false);
-                    if (gap == 1) begin = i;
+                    if (gap > 2)
+                        Writes.reversal(array, i, i + gap, 0.01, true, false);
+                    else
+                        Writes.swap(array, i, i + gap, 0.01, true, false);
+                    if (gap == 1)
+                        begin = i;
                     gap *= 2;
                 }
             }

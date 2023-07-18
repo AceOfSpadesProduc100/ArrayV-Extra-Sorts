@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class NaturalHeadPullSort extends Sort {
         this.setRunAllSortsName("Natural Head Pull Sort");
         this.setRunSortName("Natural Head Pull Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -41,14 +40,15 @@ final public class NaturalHeadPullSort extends Sort {
                 Highlights.markArray(1, i - 1);
                 Highlights.markArray(2, i);
                 Delays.sleep(0.01);
-                if (Reads.compareValues(array[i - 1], array[i]) > 0) {
+                if (Reads.compareIndices(array, i - 1, i, 0.5, true) > 0) {
                     pull = i;
                     while (pull >= 1) {
                         Writes.swap(array, pull - 1, pull, 0.01, true, false);
                         pull--;
                     }
                     i++;
-                } else currentswap = false;
+                } else
+                    currentswap = false;
             }
             verifyi = 1;
             verifypass = true;
@@ -56,8 +56,10 @@ final public class NaturalHeadPullSort extends Sort {
                 Highlights.markArray(1, verifyi - 1);
                 Highlights.markArray(2, verifyi);
                 Delays.sleep(0.01);
-                if (Reads.compareValues(array[verifyi - 1], array[verifyi]) <= 0) verifyi++;
-                else verifypass = false;
+                if (Reads.compareIndices(array, verifyi - 1, verifyi, 0.5, true) <= 0)
+                    verifyi++;
+                else
+                    verifypass = false;
             }
         }
     }

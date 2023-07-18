@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class StablePlaygroundSort extends Sort {
         this.setRunAllSortsName("Stable Playground Sort");
         this.setRunSortName("Stable Playground Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -32,7 +31,7 @@ final public class StablePlaygroundSort extends Sort {
         for (int j = 0; j < length; j++) {
             Highlights.markArray(2, j);
             Delays.sleep(0.005);
-            if (Reads.compareValues(array[j], array[lowestindex]) == -1){
+            if (Reads.compareIndices(array, j, lowestindex, 0.5, true) == -1) {
                 lowestindex = j;
                 Highlights.markArray(1, lowestindex);
                 Delays.sleep(0.005);
@@ -48,13 +47,15 @@ final public class StablePlaygroundSort extends Sort {
             Highlights.markArray(1, target);
             Highlights.markArray(2, right);
             Delays.sleep(0.005);
-            if (Reads.compareValues(array[target], array[right]) < 0) {
-                if (lowesthigh == -1) lowesthigh = right;
+            if (Reads.compareIndices(array, target, right, 0.5, true) < 0) {
+                if (lowesthigh == -1)
+                    lowesthigh = right;
                 else {
                     Highlights.markArray(1, lowesthigh);
                     Highlights.markArray(2, right);
                     Delays.sleep(0.005);
-                    if (Reads.compareValues(array[lowesthigh], array[right]) > 0) lowesthigh = right;
+                    if (Reads.compareIndices(array, lowesthigh, right, 0.5, true) > 0)
+                        lowesthigh = right;
                 }
             }
             right++;
@@ -66,11 +67,14 @@ final public class StablePlaygroundSort extends Sort {
         int dir = 0;
         int chase = 0;
         if (Math.abs(target - item) != 1) {
-            if (target - item > 0) dir = 1;
-            else dir = -1;
+            if (target - item > 0)
+                dir = 1;
+            else
+                dir = -1;
             chase = item;
             while (Math.abs(target - chase) != 1) {
-                if (Reads.compareValues(array[chase], array[chase + dir]) != 0) Writes.swap(array, chase, chase + dir, 0.005, true, false);
+                if (Reads.compareIndices(array, chase, chase + dir, 0.5, true) != 0)
+                    Writes.swap(array, chase, chase + dir, 0.005, true, false);
                 chase += dir;
             }
         }
@@ -79,7 +83,8 @@ final public class StablePlaygroundSort extends Sort {
     protected void quit(int[] array, int bound, int item) {
         int pull = item;
         while (pull + 1 < bound) {
-            if (Reads.compareValues(array[pull], array[pull + 1]) != 0) Writes.swap(array, pull, pull + 1, 0.005, true, false);
+            if (Reads.compareIndices(array, pull, pull + 1, 0.5, true) != 0)
+                Writes.swap(array, pull, pull + 1, 0.005, true, false);
             pull++;
         }
     }
@@ -97,7 +102,8 @@ final public class StablePlaygroundSort extends Sort {
                 if (target != -1) {
                     chase(array, lasttarget, target);
                     lasttarget = target;
-                } else quit(array, bound, lasttarget);
+                } else
+                    quit(array, bound, lasttarget);
             }
             bound--;
         }

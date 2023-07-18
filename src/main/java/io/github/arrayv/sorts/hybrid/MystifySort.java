@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.insert.PDBinaryInsertionSort;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.insert.PDBinaryInsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -23,7 +23,6 @@ final public class MystifySort extends Sort {
         this.setRunAllSortsName("Mystify Sort");
         this.setRunSortName("Mystifysort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -56,7 +55,8 @@ final public class MystifySort extends Sort {
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer < 2) return 2;
+        if (answer < 2)
+            return 2;
         return answer;
     }
 
@@ -65,7 +65,8 @@ final public class MystifySort extends Sort {
         int effectivelen = currentLength;
         effectivelen -= effectivelen % base;
         int size = 1;
-        while (size <= effectivelen) size *= base;
+        while (size <= effectivelen)
+            size *= base;
         size /= base;
         boolean verify = false;
         while (size > base && !verify) {
@@ -73,8 +74,10 @@ final public class MystifySort extends Sort {
             int verifyi = size - 1;
             verify = true;
             while (verifyi < currentLength && verify) {
-                if (Reads.compareIndices(array, verifyi, verifyi + 1, 0.25, true) <= 0) verifyi++;
-                else verify = false;
+                if (Reads.compareIndices(array, verifyi, verifyi + 1, 0.25, true) <= 0)
+                    verifyi++;
+                else
+                    verify = false;
             }
             if (size != 1 && !verify) {
                 int[] pieces = Writes.createExternalArray(effectivelen);
@@ -91,6 +94,7 @@ final public class MystifySort extends Sort {
                 Writes.deleteExternalArray(pieces);
             }
         }
-        if (!verify) binsert.pdbinsert(array, 0, currentLength, 0.25, false);
+        if (!verify)
+            binsert.pdbinsert(array, 0, currentLength, 0.25, false);
     }
 }

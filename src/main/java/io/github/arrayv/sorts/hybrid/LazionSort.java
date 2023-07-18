@@ -1,10 +1,9 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.insert.BlockInsertionSortNeon;
-import sorts.insert.PDBinaryInsertionSort;
-import sorts.templates.GrailSorting;
-import utils.Rotations;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.insert.BlockInsertionSort;
+import io.github.arrayv.sorts.insert.PDBinaryInsertionSort;
+import io.github.arrayv.sorts.templates.GrailSorting;
 
 /*
 
@@ -17,7 +16,7 @@ CODED FOR ARRAYV BY PCBOYGAMES
 */
 final public class LazionSort extends GrailSorting {
 
-    BlockInsertionSortNeon blocksert = new BlockInsertionSortNeon(arrayVisualizer);
+    BlockInsertionSort blocksert = new BlockInsertionSort(arrayVisualizer);
     PDBinaryInsertionSort binsert = new PDBinaryInsertionSort(arrayVisualizer);
 
     public LazionSort(ArrayVisualizer arrayVisualizer) {
@@ -26,7 +25,6 @@ final public class LazionSort extends GrailSorting {
         this.setRunAllSortsName("Lazion Stable Sort");
         this.setRunSortName("Lazion Sort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -37,24 +35,20 @@ final public class LazionSort extends GrailSorting {
 
     protected int powlte(int value, int base) {
         int val;
-        for (val = 1; val <= value; val *= base);
+        for (val = 1; val <= value; val *= base)
+            ;
         return val / base;
-    }
-
-    protected void grailRotate(int[] array, int pos, int lenA, int lenB) {
-        Highlights.clearAllMarks();
-        Rotations.neon(array, pos, lenA, lenB, 0.5, true, false);
     }
 
     protected void merge(int[] array, int start, int end, int base) {
         int blockLen = (end - start) / base;
         for (int i = start; i + blockLen < end; i += blockLen) {
-            grailMergeWithoutBuffer(array, start, i - start + blockLen, blockLen);
+            grailLazyMerge(array, start, i - start + blockLen, blockLen);
         }
     }
 
     protected void nonBn(int[] array, int start, int end) {
-        blocksert.insertionSort(array, start, end);
+        blocksert.insertionSort(array, start, end, 0.5, false);
     }
 
     protected void mergesLen(int[] array, int start, int end, int lengthstart, int base) {
@@ -66,11 +60,14 @@ final public class LazionSort extends GrailSorting {
                 merge(array, index, index + len, base);
                 index += len;
             }
-            if (index != end) nonBn(array, index, end);
+            if (index != end)
+                nonBn(array, index, end);
             len *= base;
         }
-        if (len == end - start) merge(array, start, end, base);
-        else nonBn(array, start, end);
+        if (len == end - start)
+            merge(array, start, end, base);
+        else
+            nonBn(array, start, end);
     }
 
     @Override
@@ -80,7 +77,8 @@ final public class LazionSort extends GrailSorting {
         for (i = 0; i + blockLen <= currentLength; i += blockLen) {
             binsert.pdbinsert(array, i, i + blockLen, 0.5, false);
         }
-        if (i < currentLength) binsert.pdbinsert(array, i, currentLength, 0.5, false);
+        if (i < currentLength)
+            binsert.pdbinsert(array, i, currentLength, 0.5, false);
         mergesLen(array, 0, currentLength, blockLen, base);
     }
 }

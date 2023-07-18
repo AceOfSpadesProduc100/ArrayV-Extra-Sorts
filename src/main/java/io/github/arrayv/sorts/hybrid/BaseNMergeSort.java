@@ -164,7 +164,7 @@ final public class BaseNMergeSort extends Sort {
             } else if (low >= mid && high < end) {
                 Highlights.clearMark(1);
                 Writes.write(tmp, nxt, array[high++], 1, false, true);
-            } else if (Reads.compareValues(array[low], array[high]) == -1) {
+            } else if (Reads.compareIndices(array, low, high, 0.5, true) == -1) {
                 Writes.write(tmp, nxt, array[low++], 1, false, true);
             } else {
                 Writes.write(tmp, nxt, array[high++], 1, false, true);

@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -20,7 +20,6 @@ final public class SimpleFireSort extends Sort {
         this.setRunAllSortsName("Simple Fire Sort");
         this.setRunSortName("Simple Fire Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -35,16 +34,17 @@ final public class SimpleFireSort extends Sort {
         int i = 0;
         int moves = 0;
         while (i < currentLength || twist == -1) {
-            if (i == 0 && twist == -1){
+            if (i == 0 && twist == -1) {
                 twist *= -1;
                 moves = 0;
             }
-            for (int j = i; (twist == -1 ? j < currentLength : j > 0) && Reads.compareValues(array[j - 1], array[j]) == twist; j -= twist) {
+            for (int j = i; (twist == -1 ? j < currentLength : j > 0)
+                    && Reads.compareIndices(array, j - 1, j, 0.5, true) == twist; j -= twist) {
                 moves++;
                 Writes.swap(array, j, j - 1, 0.005, true, false);
             }
             i += twist;
-            if (moves > limit){
+            if (moves > limit) {
                 limit += currentLength;
                 moves = 0;
                 twist *= -1;

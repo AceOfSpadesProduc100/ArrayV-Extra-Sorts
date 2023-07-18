@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class CircleSortInverseIterative extends Sort {
         this.setRunAllSortsName("Inverse Iterative Circle Sort");
         this.setRunSortName("Inverse Iterative Circlesort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -35,15 +34,17 @@ final public class CircleSortInverseIterative extends Sort {
             Highlights.markArray(1, left);
             Highlights.markArray(2, right);
             Delays.sleep(0.5);
-            if (Reads.compareValues(array[left], array[right]) > 0) {
+            if (Reads.compareIndices(array, left, right, 0.5, true) > 0) {
                 Writes.swap(array, left, right, 0.5, true, false);
                 swaphere = true;
             }
             left++;
             right--;
         }
-        if (anyswaps) return anyswaps;
-        else return swaphere;
+        if (anyswaps)
+            return anyswaps;
+        else
+            return swaphere;
     }
 
     @Override

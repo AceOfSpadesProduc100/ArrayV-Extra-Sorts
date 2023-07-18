@@ -1,10 +1,10 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 // Replace this with the path of the target algorithm.
-import sorts.distribute.FlightSort;
+import io.github.arrayv.sorts.distribute.FlightSort;
 
 /*
 
@@ -29,7 +29,6 @@ final public class BuildAMergeSort extends Sort {
         this.setRunAllSortsName("ABClamber as Merge Sort");
         this.setRunSortName("Build-A-Merge Sort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -39,15 +38,23 @@ final public class BuildAMergeSort extends Sort {
     }
 
     protected void method(int[] array, int start, int len) {
-        if (start != 0) for (int g = 0; g < len; g++) Writes.swap(array, g, start + g, 0.125, true, false);
-        try {sort.runSort(array, len, NUMBER_Base);}
-        catch (Exception e) {e.printStackTrace();}
-        if (start != 0) for (int g = 0; g < len; g++) Writes.swap(array, g, start + g, 0.125, true, false);
+        if (start != 0)
+            for (int g = 0; g < len; g++)
+                Writes.swap(array, g, start + g, 0.125, true, false);
+        try {
+            sort.runSort(array, len, NUMBER_Base);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (start != 0)
+            for (int g = 0; g < len; g++)
+                Writes.swap(array, g, start + g, 0.125, true, false);
     }
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer < 2) return 2;
+        if (answer < 2)
+            return 2;
         return answer;
     }
 

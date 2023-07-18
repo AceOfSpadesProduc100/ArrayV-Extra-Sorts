@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.BogoSorting;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.BogoSorting;
 
 public final class FordSort extends BogoSorting {
 
@@ -11,7 +11,7 @@ public final class FordSort extends BogoSorting {
         setRunAllSortsName("Ford Sort");
         setRunSortName("Ford Sort");
         setCategory("Exchange Sorts");
-        setComparisonBased(true);
+
         setBucketSort(false);
         setRadixSort(false);
         setUnreasonablySlow(true);
@@ -22,25 +22,26 @@ public final class FordSort extends BogoSorting {
 
     @Override
     public void runSort(int[] array, int length, int bucketCount) {
-        int q=0;
-        while(!isArraySorted(array, length)) {
-            for(int k=length/2; k>0; k--) {
-                for(int i=q; i<length; i+=2*k) {
+        int q = 0;
+        while (!isArraySorted(array, length)) {
+            for (int k = length / 2; k > 0; k--) {
+                for (int i = q; i < length; i += 2 * k) {
                     int l = i;
                     boolean change = false;
-                    while(l > 0 && Reads.compareValues(array[l], array[l-1]) == -1) {
-                        Writes.swap(array,l,l-1,1,true,false);
-                        l-=2;
-                        if(i>0) i--;
+                    while (l > 0 && Reads.compareIndices(array, l, l - 1, 0.5, true) == -1) {
+                        Writes.swap(array, l, l - 1, 1, true, false);
+                        l -= 2;
+                        if (i > 0)
+                            i--;
                         change = true;
                     }
-                    if(change)
+                    if (change)
                         i++;
                     else
                         i--;
                 }
             }
-            q=(q+1)&1;
+            q = (q + 1) & 1;
         }
     }
 

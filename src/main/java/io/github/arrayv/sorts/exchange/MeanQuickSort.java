@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
  *
@@ -33,7 +33,6 @@ final public class MeanQuickSort extends Sort {
         this.setRunAllSortsName("Mean Quick Sort");
         this.setRunSortName("Mean Quick Sort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -48,9 +47,12 @@ final public class MeanQuickSort extends Sort {
 
         Writes.startLap();
 
-        if(left > right)      cmpVal =  1;
-        else if(left < right) cmpVal = -1;
-        else                  cmpVal =  0;
+        if (left > right)
+            cmpVal = 1;
+        else if (left < right)
+            cmpVal = -1;
+        else
+            cmpVal = 0;
 
         Writes.stopLap();
 
@@ -68,33 +70,33 @@ final public class MeanQuickSort extends Sort {
             return;
         }
 
-        double mean = (double)sum / (double)count;
+        double mean = (double) sum / (double) count;
 
         int lsum = 0;
         int rsum = 0;
 
         while (left <= right) {
             // while (this.compareIntDouble(array[right], mean) >= 0) {
-            //     rsum += array[right];
-            //     right--;
-            //     Delays.sleep(0.5);
-            //     Highlights.markArray(4, right);
+            // rsum += array[right];
+            // right--;
+            // Delays.sleep(0.5);
+            // Highlights.markArray(4, right);
             // }
 
             // if (left > right) {
-            //     break;
+            // break;
             // }
 
             // if (this.compareIntDouble(array[left], mean) >= 0) {
-            //     Writes.swap(array, left, right, 1, false, false);
-            //     rsum += array[right];
-            //     right--;
-            //     Highlights.markArray(4, right);
+            // Writes.swap(array, left, right, 1, false, false);
+            // rsum += array[right];
+            // right--;
+            // Highlights.markArray(4, right);
             // }
             // Reads.addComparison();
 
             // if (left > right || left >= highestEnd) {
-            //     break;
+            // break;
             // }
 
             // lsum += array[left];
@@ -149,11 +151,11 @@ final public class MeanQuickSort extends Sort {
         partition(array, 0, sortLength - 1, sum);
 
         // for (int i = 1; i < sortLength; i++) {
-        //     int j = i;
-        //     while (j > 0 && Reads.compareIndices(array, j, j - 1, 0.25, true) == -1) {
-        //         Writes.swap(array, j, j - 1, 0.25, true, false);
-        //         j--;
-        //     }
+        // int j = i;
+        // while (j > 0 && Reads.compareIndices(array, j, j - 1, 0.25, true) == -1) {
+        // Writes.swap(array, j, j - 1, 0.25, true, false);
+        // j--;
+        // }
         // }
     }
 }

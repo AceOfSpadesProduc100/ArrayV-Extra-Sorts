@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.insert.PatternDefeatingInsertionSort;
-import sorts.templates.GrailSorting;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.GrailSorting;
+import io.github.arrayv.sorts.insert.BlockInsertionSort;
 
 /*
  *
@@ -39,7 +39,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /*                                       */
 /*****************************************/
 
-final public class OptimizedLazyStableSort extends GrailSorting {
+public final class OptimizedLazyStableSort extends GrailSorting {
     public OptimizedLazyStableSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
 
@@ -47,7 +47,6 @@ final public class OptimizedLazyStableSort extends GrailSorting {
         this.setRunAllSortsName("Optimized Lazy Stable Sort");
         this.setRunSortName("Optimized Lazy Stable Sort");
         this.setCategory("Merge Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -55,26 +54,27 @@ final public class OptimizedLazyStableSort extends GrailSorting {
         this.setBogoSort(false);
     }
 
-    protected void grailLazyStableSort(int[] arr, int pos, int len) {
-        PatternDefeatingInsertionSort inserter = new PatternDefeatingInsertionSort(arrayVisualizer);
+    @Override
+    public void grailLazyStableSort(int[] arr, int pos, int len) {
+        BlockInsertionSort insert = new BlockInsertionSort(arrayVisualizer);
         int dist;
         for (dist = 0; dist + 16 < len; dist += 16)
-            inserter.insertionSort(arr, pos + dist, pos + dist + 16, 1, false);
+            insert.customInsertSort(arr, pos + dist, pos + dist + 16, 1, false);
         if (dist < len)
-            inserter.insertionSort(arr, pos + dist, pos + len, 1, false);
+            insert.customInsertSort(arr, pos + dist, pos + len, 1, false);
 
-        for(int part = 16; part < len; part *= 2) {
+        for (int part = 16; part < len; part *= 2) {
             int left = 0;
             int right = len - 2 * part;
 
-            while(left <= right) {
-                this.grailMergeWithoutBuffer(arr, pos + left, part, part);
+            while (left <= right) {
+                this.grailLazyMerge(arr, pos + left, part, part);
                 left += 2 * part;
             }
 
             int rest = len - left;
-            if(rest > part) {
-                this.grailMergeWithoutBuffer(arr, pos + left, part, rest - part);
+            if (rest > part) {
+                this.grailLazyMerge(arr, pos + left, part, rest - part);
             }
         }
     }

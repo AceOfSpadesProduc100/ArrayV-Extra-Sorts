@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class PopPopSort extends Sort {
         this.setRunAllSortsName("Pop Pop Sort");
         this.setRunSortName("Pop Pop Sort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -48,7 +47,8 @@ final public class PopPopSort extends Sort {
     protected void pop(int[] array, int start, int end, int dir) {
         bubble(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
         bubble(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-        bubble(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+        bubble(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                0 - dir);
         bubble(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
         bubble(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
         bubble(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -59,7 +59,7 @@ final public class PopPopSort extends Sort {
     public void runSort(int[] array, int currentLength, int bucketCount) {
         pop(array, 1, (int) Math.floor((currentLength + 1) / 4), -1);
         pop(array, (int) Math.floor((currentLength + 1) / 4) + 1, (int) Math.floor((currentLength + 1) / 2), 1);
-        pop(array, (int) Math.floor((currentLength + 1) / 2) + 1, (int) Math.floor (((currentLength + 1) * 3) / 4), -1);
+        pop(array, (int) Math.floor((currentLength + 1) / 2) + 1, (int) Math.floor(((currentLength + 1) * 3) / 4), -1);
         pop(array, (int) Math.floor(((currentLength + 1) * 3) / 4) + 1, currentLength, 1);
         pop(array, 1, (int) Math.floor((currentLength + 1) / 2), -1);
         pop(array, (int) Math.floor((currentLength + 1) / 2) + 1, currentLength, 1);

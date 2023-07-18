@@ -1,8 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
-
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 final public class OptimizedZubbleSort extends Sort {
     public OptimizedZubbleSort(ArrayVisualizer arrayVisualizer) {
@@ -12,7 +11,6 @@ final public class OptimizedZubbleSort extends Sort {
         this.setRunAllSortsName("Optimized Zubble Sort");
         this.setRunSortName("Optimized Zubblesort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -22,17 +20,24 @@ final public class OptimizedZubbleSort extends Sort {
 
     @Override
     public void runSort(int[] array, int length, int bucketCount) {
-        for(int i = length - 1, cons = 1, first = 1; i >= first; i-=cons) {
+        for (int i = length - 1, cons = 1, first = 1; i >= first; i -= cons) {
             boolean firstset = false;
-            for(int j = Math.max(first - 1, 0); j < i; j++) {
+            for (int j = Math.max(first - 1, 0); j < i; j++) {
                 int k = j;
                 boolean swap = false;
-                while(j < i && Reads.compareValues(array[k], array[j + 1]) == 1){
+                while (j < i && Reads.compareIndices(array, k, j + 1, 0.5, true) == 1) {
                     j++;
                     swap = true;
                 }
-                if(swap) {Writes.swap(array, k, j, 1, true, false); cons=1; if(!firstset) first=k; firstset = true;}
-                else {cons++;}
+                if (swap) {
+                    Writes.swap(array, k, j, 1, true, false);
+                    cons = 1;
+                    if (!firstset)
+                        first = k;
+                    firstset = true;
+                } else {
+                    cons++;
+                }
             }
         }
     }

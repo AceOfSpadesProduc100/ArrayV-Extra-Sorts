@@ -35,11 +35,11 @@ public final class PseudoHeapSort extends Sort {
 		int j = root;
 		while (2 * j < length) {
 			int k = 2 * j;
-			if (k < length && this.Reads.compareValues(array[start + k - 1], array[start + k]) == 1) {
+			if (k < length && this.Reads.compareIndices(array, start + k - 1, start + k, 0.5, true) == 1) {
 				k++;
 			}
-			if (this.Reads.compareIndices(array, start + j - 1, start + k - 1, 1.0D, true) == 1) {
-				this.Writes.swap(array, start + j - 1, start + k - 1, 1.0D, true, false);
+			if (this.Reads.compareIndices(array, start + j - 1, start + k - 1, 1D, true) == 1) {
+				this.Writes.swap(array, start + j - 1, start + k - 1, 0, true, false);
 				j = k;
 				swapped = true;
 				continue;

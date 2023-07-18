@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -23,7 +23,6 @@ public final class OOPSMeanPartitionSort extends Sort {
         this.setRunAllSortsName("Out of Place Stable Mean Partition Sort");
         this.setRunSortName("OOP Stable Mean Partitionsort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -35,10 +34,10 @@ public final class OOPSMeanPartitionSort extends Sort {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
         for (int i = start; i < end; i++) {
-            if(array[i] < min) {
+            if (array[i] < min) {
                 min = array[i];
             }
-            if(array[i] > max) {
+            if (array[i] > max) {
                 max = array[i];
             }
         }

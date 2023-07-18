@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -23,7 +23,6 @@ public final class StableMeanPartitionSort extends Sort {
         this.setRunAllSortsName("Stable Mean Partition Sort");
         this.setRunSortName("Stable Mean Partitionsort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -35,10 +34,10 @@ public final class StableMeanPartitionSort extends Sort {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
         for (int i = start; i < end; i++) {
-            if(array[i] < min) {
+            if (array[i] < min) {
                 min = array[i];
             }
-            if(array[i] > max) {
+            if (array[i] > max) {
                 max = array[i];
             }
         }
@@ -58,10 +57,12 @@ public final class StableMeanPartitionSort extends Sort {
                     Writes.write(array, j, array[j - 1], 0.025, true, false);
                     w = true;
                 }
-                if (w) Writes.write(array, start + itemslow, item, 0.025, true, false);
+                if (w)
+                    Writes.write(array, start + itemslow, item, 0.025, true, false);
                 itemslow++;
                 inlow = true;
-            } else inhigh = true;
+            } else
+                inhigh = true;
         }
         return itemslow;
     }

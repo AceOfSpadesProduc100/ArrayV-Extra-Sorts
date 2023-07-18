@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class NReboundSort extends Sort {
         this.setRunAllSortsName("Bounce-N Rebound Sort");
         this.setRunSortName("Bounce-N Rebound Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -30,20 +29,24 @@ final public class NReboundSort extends Sort {
 
     protected int log2(int x) {
         int n = 1;
-        while (1 << n < x) n++;
-        if (1 << n > x) n--;
+        while (1 << n < x)
+            n++;
+        if (1 << n > x)
+            n--;
         return n;
     }
 
     @Override
     public int validateAnswer(int answer) {
-        if (answer < 0) return 0;
+        if (answer < 0)
+            return 0;
         return answer;
     }
 
     @Override
     public void runSort(int[] array, int currentLength, int times) {
-        if (times == 0) times = currentLength / 16 >= 2 ? currentLength / 16: currentLength / 2;
+        if (times == 0)
+            times = currentLength / 16 >= 2 ? currentLength / 16 : currentLength / 2;
         int dir = 1;
         int bounces = 0;
         int i = 0;

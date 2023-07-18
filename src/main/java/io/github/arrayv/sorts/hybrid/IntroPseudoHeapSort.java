@@ -10,7 +10,6 @@ import io.github.arrayv.sorts.templates.Sort;
  */
 public final class IntroPseudoHeapSort extends Sort {
 
-
 	public IntroPseudoHeapSort(ArrayVisualizer arrayVisualizer) {
 		super(arrayVisualizer);
 		setSortListName("Iterative Intro Pseudo-Heap");
@@ -30,7 +29,7 @@ public final class IntroPseudoHeapSort extends Sort {
 		int j = root;
 		while (2 * j < length) {
 			int k = 2 * j;
-			if (k < length && this.Reads.compareValues(array[start + k - 1], array[start + k]) == 1) {
+			if (k < length && this.Reads.compareIndices(array, start + k - 1, start + k, 0.5, true) == 1) {
 				k++;
 			}
 			if (this.Reads.compareIndices(array, start + j - 1, start + k - 1, 1.0D, true) == 1) {
@@ -50,20 +49,21 @@ public final class IntroPseudoHeapSort extends Sort {
 
 	@Override
 	public void runSort(int[] array, int length, int bucketCount) {
-    	int threshold = 0, n = 1;
-    	for(; n < length; n*=2, threshold++);
+		int threshold = 0, n = 1;
+		for (; n < length; n *= 2, threshold++)
+			;
 
 		threshold /= 2;
-        int iterations = 0;
+		int iterations = 0;
 		boolean swapped = true;
 		while (swapped) {
 			swapped = false;
 			iterations++;
-            if(iterations >= threshold) {
-            	InsertionSort ins = new InsertionSort(arrayVisualizer);
-            	ins.customInsertSort(array, 0, length, 0.5, false);
-            	break;
-            }
+			if (iterations >= threshold) {
+				InsertionSort ins = new InsertionSort(arrayVisualizer);
+				ins.customInsertSort(array, 0, length, 0.5, false);
+				break;
+			}
 			for (int i = length - 2; i >= 0; i--) {
 				if (sift(array, i, length))
 					swapped = true;

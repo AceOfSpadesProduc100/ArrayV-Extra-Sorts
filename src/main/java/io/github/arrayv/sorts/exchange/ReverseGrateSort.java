@@ -42,7 +42,7 @@ public final class ReverseGrateSort extends Sort {
 					this.Highlights.markArray(1, i);
 					this.Highlights.markArray(2, j);
 					this.Delays.sleep(0.25D);
-					if (this.Reads.compareValues(array[i], array[j]) > 0) {
+					if (this.Reads.compareIndices(array, i, j, 0.5, true) > 0) {
 						sorted = false;
 						this.Writes.swap(array, i, j, 0.1D, true, false);
 						break;

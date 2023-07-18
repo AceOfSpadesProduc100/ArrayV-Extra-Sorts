@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import sorts.templates.Sort;
-import main.ArrayVisualizer;
-import sorts.insert.BinaryInsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.insert.BinaryInsertionSort;
 
 /*
  *
@@ -38,7 +38,6 @@ final public class KitaSort extends Sort {
         this.setRunAllSortsName("Kita Sort");
         this.setRunSortName("Kitasort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -49,28 +48,29 @@ final public class KitaSort extends Sort {
     private void mergeTo(int[] from, int[] to, int a, int m, int b, int p, boolean auxwrite) {
         int i = a, j = m;
 
-        while(i < m && j < b) {
+        while (i < m && j < b) {
             Highlights.markArray(2, i);
             Highlights.markArray(3, j);
 
-            if(Reads.compareValues(from[i], from[j]) <= 0)
+            if (Reads.compareValues(from[i], from[j]) <= 0)
                 Writes.write(to, p++, from[i++], 1, true, auxwrite);
             else
                 Writes.write(to, p++, from[j++], 1, true, auxwrite);
         }
         Highlights.clearAllMarks();
 
-        while(i < m) {
+        while (i < m) {
             Highlights.markArray(2, i);
             Writes.write(to, p++, from[i++], 1, true, auxwrite);
         }
-        while(j < b) {
+        while (j < b) {
             Highlights.markArray(3, j);
             Writes.write(to, p++, from[j++], 1, true, auxwrite);
         }
     }
+
     private void pingPongMerge(int[] array, int[] buf, int a, int m1, int m2, int m3, int b) {
-        int p = 0, p1 = p + m2-a, pEnd = p + b-a;
+        int p = 0, p1 = p + m2 - a, pEnd = p + b - a;
 
         this.mergeTo(array, buf, a, m1, m2, p, true);
         this.mergeTo(array, buf, m2, m3, b, p1, true);
@@ -78,159 +78,153 @@ final public class KitaSort extends Sort {
     }
 
     private void mergeBWExt(int[] array, int[] tmp, int a, int m, int b) {
-        int s = b-m;
+        int s = b - m;
 
         Writes.arraycopy(array, m, tmp, 0, s, 1, true, true);
 
-        int i = s-1, j = m-1;
+        int i = s - 1, j = m - 1;
 
-        while(i >= 0 && j >= a) {
+        while (i >= 0 && j >= a) {
             Highlights.markArray(2, j);
 
-            if(Reads.compareValues(tmp[i], array[j]) >= 0)
+            if (Reads.compareValues(tmp[i], array[j]) >= 0)
                 Writes.write(array, --b, tmp[i--], 1, true, false);
             else
                 Writes.write(array, --b, array[j--], 1, true, false);
         }
         Highlights.clearAllMarks();
 
-        while(i >= 0) Writes.write(array, --b, tmp[i--], 1, true, false);
+        while (i >= 0)
+            Writes.write(array, --b, tmp[i--], 1, true, false);
     }
 
     private void blockMerge(int[] array, int[] buf, int[] tags, int[] tTmp, int a, int m, int b, int bLen) {
-        int ta = a/bLen, tm = m/bLen, tb = b/bLen,
-            ti = ta, tj = tm, i = a+tags[ti]*bLen, j = m+tags[tj]*bLen,
-            c = 0, ci = 0, cj = 0, bi = ti, bj = tj, l = 0, r = 0, t = 2, p;
+        int ta = a / bLen, tm = m / bLen, tb = b / bLen,
+                ti = ta, tj = tm, i = a + tags[ti] * bLen, j = m + tags[tj] * bLen,
+                c = 0, ci = 0, cj = 0, bi = ti, bj = tj, l = 0, r = 0, t = 2, p;
 
         boolean lBuf, lLeft = true, rLeft = true;
 
         Highlights.markArray(2, i);
         Highlights.markArray(3, j);
 
-        for(int k = 0; k < 2*bLen; k++) {
-            if(lLeft && (!rLeft || Reads.compareValues(array[i], array[j]) <= 0)) {
+        for (int k = 0; k < 2 * bLen; k++) {
+            if (lLeft && (!rLeft || Reads.compareIndices(array, i, j, 0.5, true) <= 0)) {
                 Writes.write(buf, k, array[i++], 1, true, true);
                 l++;
 
-                if(++ci == bLen) {
-                    if(++ti == tm) {
+                if (++ci == bLen) {
+                    if (++ti == tm) {
                         lLeft = false;
                         Highlights.clearMark(2);
-                    }
-                    else {
-                        i = a+tags[ti]*bLen;
+                    } else {
+                        i = a + tags[ti] * bLen;
                         ci = 0;
                         Highlights.markArray(2, i);
                     }
-                }
-                else Highlights.markArray(2, i);
-            }
-            else {
+                } else
+                    Highlights.markArray(2, i);
+            } else {
                 Writes.write(buf, k, array[j++], 1, true, true);
                 r++;
 
-                if(++cj == bLen) {
-                    if(++tj == tb) {
+                if (++cj == bLen) {
+                    if (++tj == tb) {
                         rLeft = false;
                         Highlights.clearMark(3);
-                    }
-                    else {
-                        j = m+tags[tj]*bLen;
+                    } else {
+                        j = m + tags[tj] * bLen;
                         cj = 0;
                         Highlights.markArray(3, j);
                     }
-                }
-                else Highlights.markArray(3, j);
+                } else
+                    Highlights.markArray(3, j);
             }
         }
 
         lBuf = l >= r;
-        p = lBuf ? a+tags[bi]*bLen : m+tags[bj]*bLen;
+        p = lBuf ? a + tags[bi] * bLen : m + tags[bj] * bLen;
 
         do {
-            if(lLeft && (!rLeft || Reads.compareValues(array[i], array[j]) <= 0)) {
+            if (lLeft && (!rLeft || Reads.compareIndices(array, i, j, 0.5, true) <= 0)) {
                 Writes.write(array, p++, array[i++], 1, true, false);
                 l++;
 
-                if(++ci == bLen) {
-                    if(++ti == tm) {
+                if (++ci == bLen) {
+                    if (++ti == tm) {
                         lLeft = false;
                         Highlights.clearMark(2);
-                    }
-                    else {
-                        i = a+tags[ti]*bLen;
+                    } else {
+                        i = a + tags[ti] * bLen;
                         ci = 0;
                         Highlights.markArray(2, i);
                     }
-                }
-                else Highlights.markArray(2, i);
-            }
-            else {
+                } else
+                    Highlights.markArray(2, i);
+            } else {
                 Writes.write(array, p++, array[j++], 1, true, false);
                 r++;
 
-                if(++cj == bLen) {
-                    if(++tj == tb) {
+                if (++cj == bLen) {
+                    if (++tj == tb) {
                         rLeft = false;
                         Highlights.clearMark(3);
-                    }
-                    else {
-                        j = m+tags[tj]*bLen;
+                    } else {
+                        j = m + tags[tj] * bLen;
                         cj = 0;
                         Highlights.markArray(3, j);
                     }
-                }
-                else Highlights.markArray(3, j);
+                } else
+                    Highlights.markArray(3, j);
             }
-            if(++c == bLen) {
-                if(lBuf) {
+            if (++c == bLen) {
+                if (lBuf) {
                     l -= bLen;
                     Writes.write(tTmp, t++, tags[bi++], 0, false, true);
-                }
-                else {
+                } else {
                     r -= bLen;
-                    Writes.write(tTmp, t++, tags[bj++]+tm-ta, 0, false, true);
+                    Writes.write(tTmp, t++, tags[bj++] + tm - ta, 0, false, true);
                 }
 
                 lBuf = l >= r;
-                p = lBuf ? a+tags[bi]*bLen : m+tags[bj]*bLen;
+                p = lBuf ? a + tags[bi] * bLen : m + tags[bj] * bLen;
                 c = 0;
             }
-        }
-        while(lLeft || rLeft);
+        } while (lLeft || rLeft);
 
-        p = 0; t = 0;
+        p = 0;
+        t = 0;
 
-        while(l > 0) {
-            Writes.arraycopy(buf, p, array, a+tags[bi]*bLen, bLen, 1, true, false);
+        while (l > 0) {
+            Writes.arraycopy(buf, p, array, a + tags[bi] * bLen, bLen, 1, true, false);
             Writes.write(tTmp, t++, tags[bi++], 0, false, true);
             p += bLen;
             l -= bLen;
         }
-        while(r > 0) {
-            Writes.arraycopy(buf, p, array, m+tags[bj]*bLen, bLen, 1, true, false);
-            Writes.write(tTmp, t++, tags[bj++]+tm-ta, 0, false, true);
+        while (r > 0) {
+            Writes.arraycopy(buf, p, array, m + tags[bj] * bLen, bLen, 1, true, false);
+            Writes.write(tTmp, t++, tags[bj++] + tm - ta, 0, false, true);
             p += bLen;
             r -= bLen;
         }
-        Writes.arraycopy(tTmp, 0, tags, ta, tb-ta, 0, false, true);
+        Writes.arraycopy(tTmp, 0, tags, ta, tb - ta, 0, false, true);
     }
+
     private void blockCycle(int[] array, int[] buf, int[] keys, int a, int bLen, int bCnt) {
-        for(int i = 0; i < bCnt; i++) {
-            if(Reads.compareOriginalValues(i, keys[i]) != 0) {
-                Writes.arraycopy(array, a + i*bLen, buf, 0, bLen, 1, true, true);
+        for (int i = 0; i < bCnt; i++) {
+            if (Reads.compareOriginalValues(i, keys[i]) != 0) {
+                Writes.arraycopy(array, a + i * bLen, buf, 0, bLen, 1, true, true);
                 int j = i, next = keys[i];
 
                 do {
-                    Writes.arraycopy(array, a + next*bLen, array, a + j*bLen, bLen, 1, true, false);
+                    Writes.arraycopy(array, a + next * bLen, array, a + j * bLen, bLen, 1, true, false);
                     Writes.write(keys, j, j, 1, true, true);
 
                     j = next;
                     next = keys[next];
-                }
-                while(Reads.compareOriginalValues(next, i) != 0);
+                } while (Reads.compareOriginalValues(next, i) != 0);
 
-                Writes.arraycopy(buf, 0, array, a + j*bLen, bLen, 1, true, false);
+                Writes.arraycopy(buf, 0, array, a + j * bLen, bLen, 1, true, false);
                 Writes.write(keys, j, j, 1, true, true);
             }
         }
@@ -241,44 +235,45 @@ final public class KitaSort extends Sort {
         int a = 0, b = length;
         BinaryInsertionSort smallSort = new BinaryInsertionSort(this.arrayVisualizer);
 
-        if(length <= 32) {
+        if (length <= 32) {
             smallSort.customBinaryInsert(array, a, b, 0.5);
             return;
         }
 
-        int sqrtLg = (32-Integer.numberOfLeadingZeros(length-1))/2,
-            bLen   = 1 << sqrtLg,
-            tLen   = length/bLen,
-            bufLen = 2*bLen;
+        int sqrtLg = (32 - Integer.numberOfLeadingZeros(length - 1)) / 2,
+                bLen = 1 << sqrtLg,
+                tLen = length / bLen,
+                bufLen = 2 * bLen;
 
-        int[] buf  = Writes.createExternalArray(bufLen);
+        int[] buf = Writes.createExternalArray(bufLen);
         int[] tags = Writes.createExternalArray(tLen);
         int[] tTmp = Writes.createExternalArray(tLen);
 
-        int b1 = b-length%bLen,
-            j = 1;
+        int b1 = b - length % bLen,
+                j = 1;
 
-        if(sqrtLg%2 == 0) {
-            for(int i = a+1; i < b1; i += 2)
-                if(Reads.compareIndices(array, i-1, i, 0.5, true) > 0)
-                    Writes.swap(array, i-1, i, 0.5, false, false);
+        if (sqrtLg % 2 == 0) {
+            for (int i = a + 1; i < b1; i += 2)
+                if (Reads.compareIndices(array, i - 1, i, 0.5, true) > 0)
+                    Writes.swap(array, i - 1, i, 0.5, false, false);
             j *= 2;
         }
 
-        for(; j < bufLen; j *= 4)
-            for(int i = a; i+j < b1; i += 4*j)
-                this.pingPongMerge(array, buf, i, i+j, Math.min(i+2*j, b1), Math.min(i+3*j, b1), Math.min(i+4*j, b1));
+        for (; j < bufLen; j *= 4)
+            for (int i = a; i + j < b1; i += 4 * j)
+                this.pingPongMerge(array, buf, i, i + j, Math.min(i + 2 * j, b1), Math.min(i + 3 * j, b1),
+                        Math.min(i + 4 * j, b1));
 
-        for(int i = 0; i < tLen; i++)
-            Writes.write(tags, i, i&1, 0, false, true);
+        for (int i = 0; i < tLen; i++)
+            Writes.write(tags, i, i & 1, 0, false, true);
 
-        for(; j < length; j *= 2)
-            for(int i = a; i+j < b1; i += 2*j)
-                this.blockMerge(array, buf, tags, tTmp, i, i+j, Math.min(i+2*j, b1), bLen);
+        for (; j < length; j *= 2)
+            for (int i = a; i + j < b1; i += 2 * j)
+                this.blockMerge(array, buf, tags, tTmp, i, i + j, Math.min(i + 2 * j, b1), bLen);
 
         this.blockCycle(array, buf, tags, 0, bLen, tLen);
 
-        if(b1 < b) {
+        if (b1 < b) {
             smallSort.customBinaryInsert(array, b1, b, 0.5);
             this.mergeBWExt(array, buf, a, b1, b);
         }

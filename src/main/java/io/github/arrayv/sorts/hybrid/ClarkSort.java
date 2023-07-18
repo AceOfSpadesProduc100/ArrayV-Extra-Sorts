@@ -1,8 +1,8 @@
-package sorts.hybrid;
+package io.github.arrayv.sorts.hybrid;
 
-import main.ArrayVisualizer;
-import sorts.merge.QuadSort;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.merge.QuadSort;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -15,13 +15,13 @@ CODED FOR ARRAYV BY PCBOYGAMES
 */
 final public class ClarkSort extends Sort {
     QuadSort mergefinal = new QuadSort(arrayVisualizer);
+
     public ClarkSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
         this.setSortListName("Clark");
         this.setRunAllSortsName("Clark Sort");
         this.setRunSortName("Clarksort");
         this.setCategory("Hybrid Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -50,8 +50,10 @@ final public class ClarkSort extends Sort {
         int index;
         boolean anyswaps = true;
         boolean swapA = false;
-        while (len < currentLength) len *= 2;
-        if (len > currentLength) len /= 2;
+        while (len < currentLength)
+            len *= 2;
+        if (len > currentLength)
+            len /= 2;
         int max = len;
         int first = len;
         while (anyswaps) {
@@ -68,9 +70,11 @@ final public class ClarkSort extends Sort {
                 }
                 len /= 2;
             }
-            if (anyswaps) first /= 4;
+            if (anyswaps)
+                first /= 4;
         }
         Highlights.clearMark(2);
-        if (first != max) mergefinal.runSort(array, currentLength, 0);
+        if (first != max)
+            mergefinal.runSort(array, currentLength, 0);
     }
 }

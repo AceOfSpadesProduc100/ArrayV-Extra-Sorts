@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class SwaplessPushSort extends Sort {
         this.setRunAllSortsName("Swapless Push Sort");
         this.setRunSortName("Swapless Pushsort");
         this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,22 +33,27 @@ final public class SwaplessPushSort extends Sort {
         int first = 1;
         while (anyswaps) {
             anyswaps = false;
-            if (first > 1) i = first - 1;
-            else i = 1;
+            if (first > 1)
+                i = first - 1;
+            else
+                i = 1;
             int gap = 1;
             while (i + gap <= currentLength) {
                 Highlights.markArray(1, i - 1);
                 Highlights.markArray(2, (i - 1) + gap);
                 Delays.sleep(0.01);
-                if (Reads.compareValues(array[i - 1], array[(i - 1) + gap]) > 0) {
+                if (Reads.compareIndices(array, i - 1, (i - 1) + gap, 0.5, true) > 0) {
                     Highlights.clearMark(2);
                     int item = array[(i - 1) + gap];
-                    for (int j = gap; j > 0; j--) Writes.write(array, i - 1 + j, array[i - 1 + j - 1], 0.01, true, false);
+                    for (int j = gap; j > 0; j--)
+                        Writes.write(array, i - 1 + j, array[i - 1 + j - 1], 0.01, true, false);
                     Writes.write(array, (i - 1), item, 0.01, true, false);
-                    if (!anyswaps) first = i;
+                    if (!anyswaps)
+                        first = i;
                     anyswaps = true;
                     gap++;
-                } else i++;
+                } else
+                    i++;
             }
         }
     }

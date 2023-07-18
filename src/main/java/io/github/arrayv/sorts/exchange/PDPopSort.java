@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -19,7 +19,6 @@ final public class PDPopSort extends Sort {
         this.setRunAllSortsName("Pattern-Defeating Pop Sort");
         this.setRunSortName("Pattern-Defeating Pop Sort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -34,27 +33,35 @@ final public class PDPopSort extends Sort {
             Highlights.markArray(1, r);
             Highlights.markArray(2, r + 1);
             Delays.sleep(1);
-            if (Reads.compareValues(array[r], array[r + 1]) == dir) r++;
-            else break;
+            if (Reads.compareIndices(array, r, r + 1, 0.5, true) == dir)
+                r++;
+            else
+                break;
         }
-        if (r - rs > 2) Writes.reversal(array, rs, r, 0.2, true, false);
-        else if (r - rs > 0) Writes.swap(array, rs, r, 0.2, true, false);
+        if (r - rs > 2)
+            Writes.reversal(array, rs, r, 0.2, true, false);
+        else if (r - rs > 0)
+            Writes.swap(array, rs, r, 0.2, true, false);
         int c = 1;
         int s = start + ((end - start) / 2);
         int f = 1;
         boolean a = false;
         for (int j = end - 1; j > start; j -= c) {
-            if (f - 1 < start) s = start;
-            else s = f - 1;
+            if (f - 1 < start)
+                s = start;
+            else
+                s = f - 1;
             a = false;
             c = 1;
             for (int i = s; i < j; i++) {
                 if (Reads.compareIndices(array, i, i + 1, 0.025, true) == dir) {
                     Writes.swap(array, i, i + 1, 0.075, true, false);
-                    if (!a) f = i;
+                    if (!a)
+                        f = i;
                     a = true;
                     c = 1;
-                } else c++;
+                } else
+                    c++;
             }
         }
     }
@@ -72,7 +79,8 @@ final public class PDPopSort extends Sort {
                 index += len;
                 dir *= -1;
             }
-            if (index != currentLength) bubble(array, index, currentLength, dir);
+            if (index != currentLength)
+                bubble(array, index, currentLength, dir);
             len *= 2;
         }
         bubble(array, 0, currentLength, 1);

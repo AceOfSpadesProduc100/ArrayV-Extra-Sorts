@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -21,7 +21,6 @@ final public class WhySort extends Sort {
         this.setRunAllSortsName("Why Sort");
         this.setRunSortName("Whysort");
         this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(true);
@@ -50,7 +49,8 @@ final public class WhySort extends Sort {
     protected void pop19(int[] array, int start, int end, int dir) {
         bubble(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
         bubble(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-        bubble(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+        bubble(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                0 - dir);
         bubble(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
         bubble(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
         bubble(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -64,7 +64,8 @@ final public class WhySort extends Sort {
         } else {
             pop19(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop19(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop19(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop19(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop19(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop19(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop19(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -79,7 +80,8 @@ final public class WhySort extends Sort {
         } else {
             pop18(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop18(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop18(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop18(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop18(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop18(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop18(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -94,7 +96,8 @@ final public class WhySort extends Sort {
         } else {
             pop17(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop17(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop17(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop17(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop17(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop17(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop17(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -109,7 +112,8 @@ final public class WhySort extends Sort {
         } else {
             pop16(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop16(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop16(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop16(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop16(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop16(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop16(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -124,7 +128,8 @@ final public class WhySort extends Sort {
         } else {
             pop15(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop15(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop15(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop15(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop15(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop15(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop15(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -139,7 +144,8 @@ final public class WhySort extends Sort {
         } else {
             pop14(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop14(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop14(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop14(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop14(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop14(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop14(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -154,7 +160,8 @@ final public class WhySort extends Sort {
         } else {
             pop13(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop13(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop13(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop13(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop13(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop13(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop13(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -169,7 +176,8 @@ final public class WhySort extends Sort {
         } else {
             pop12(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop12(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop12(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop12(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop12(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop12(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop12(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -184,7 +192,8 @@ final public class WhySort extends Sort {
         } else {
             pop11(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop11(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop11(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop11(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop11(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop11(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop11(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -199,7 +208,8 @@ final public class WhySort extends Sort {
         } else {
             pop10(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop10(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop10(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop10(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop10(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop10(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop10(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -214,7 +224,8 @@ final public class WhySort extends Sort {
         } else {
             pop9(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop9(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop9(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop9(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop9(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop9(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop9(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -229,7 +240,8 @@ final public class WhySort extends Sort {
         } else {
             pop8(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop8(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop8(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop8(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop8(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop8(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop8(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -244,7 +256,8 @@ final public class WhySort extends Sort {
         } else {
             pop7(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop7(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop7(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop7(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop7(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop7(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop7(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -259,7 +272,8 @@ final public class WhySort extends Sort {
         } else {
             pop6(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop6(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop6(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop6(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop6(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop6(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop6(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -274,7 +288,8 @@ final public class WhySort extends Sort {
         } else {
             pop5(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop5(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop5(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop5(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop5(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop5(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop5(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -289,7 +304,8 @@ final public class WhySort extends Sort {
         } else {
             pop4(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop4(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop4(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop4(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop4(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop4(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop4(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -304,7 +320,8 @@ final public class WhySort extends Sort {
         } else {
             pop3(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop3(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop3(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop3(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop3(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop3(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop3(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -319,7 +336,8 @@ final public class WhySort extends Sort {
         } else {
             pop2(array, start, start + (int) Math.floor((end - start) / 4), 0 - dir);
             pop2(array, start + (int) Math.floor((end - start) / 4) + 1, (int) Math.floor((start + end) / 2), dir);
-            pop2(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4), 0 - dir);
+            pop2(array, (int) Math.floor((start + end) / 2) + 1, start + (int) Math.floor(((end - start) * 3) / 4),
+                    0 - dir);
             pop2(array, start + (int) Math.floor(((end - start) * 3) / 4) + 1, end, dir);
             pop2(array, start, (int) Math.floor((start + end) / 2), 0 - dir);
             pop2(array, (int) Math.floor((start + end) / 2) + 1, end, dir);
@@ -335,7 +353,8 @@ final public class WhySort extends Sort {
         } else {
             pop(array, 1, (int) Math.floor((currentLength + 1) / 4), -1);
             pop(array, (int) Math.floor((currentLength + 1) / 4) + 1, (int) Math.floor((currentLength + 1) / 2), 1);
-            pop(array, (int) Math.floor((currentLength + 1) / 2) + 1, (int) Math.floor (((currentLength + 1) * 3) / 4), -1);
+            pop(array, (int) Math.floor((currentLength + 1) / 2) + 1, (int) Math.floor(((currentLength + 1) * 3) / 4),
+                    -1);
             pop(array, (int) Math.floor(((currentLength + 1) * 3) / 4) + 1, currentLength, 1);
             pop(array, 1, (int) Math.floor((currentLength + 1) / 2), -1);
             pop(array, (int) Math.floor((currentLength + 1) / 2) + 1, currentLength, 1);

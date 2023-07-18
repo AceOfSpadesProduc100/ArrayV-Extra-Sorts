@@ -1,7 +1,7 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 public final class SiftSort extends Sort {
 
@@ -41,8 +41,10 @@ public final class SiftSort extends Sort {
 		}
 
 		if (count > 0) {
-			if (i != 0) sift(l1, left, left + i, meanleft / i);
-			if (j != 0) sift(l1, left + i, right, meanright / j);
+			if (i != 0)
+				sift(l1, left, left + i, meanleft / i);
+			if (j != 0)
+				sift(l1, left + i, right, meanright / j);
 		}
 	}
 

@@ -1,7 +1,8 @@
-package sorts.exchange;
+package io.github.arrayv.sorts.exchange;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -12,19 +13,10 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Adaptive Binary Clamber")
 final public class AdaptiveBinaryClamberSort extends Sort {
     public AdaptiveBinaryClamberSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Adaptive Binary Clamber");
-        this.setRunAllSortsName("Adaptive Binary Clamber Sort");
-        this.setRunSortName("Adaptive Binary Clambersort");
-        this.setCategory("Exchange Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     protected int binarySearch(int[] array, int a, int b, int value) {
@@ -34,8 +26,10 @@ final public class AdaptiveBinaryClamberSort extends Sort {
             Highlights.markArray(3, m);
             Highlights.markArray(2, b);
             Delays.sleep(1);
-            if (Reads.compareValues(value, array[m]) < 0) b = m;
-            else a = m + 1;
+            if (Reads.compareValues(value, array[m]) < 0)
+                b = m;
+            else
+                a = m + 1;
         }
         Highlights.clearMark(3);
         return a;

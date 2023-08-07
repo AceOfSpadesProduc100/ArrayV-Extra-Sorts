@@ -1,21 +1,14 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.GrailSorting;
 import io.github.arrayv.utils.Rotations;
 
+@SortMeta(name = "Lazicci")
 final public class LazicciSort extends GrailSorting {
     public LazicciSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Lazicci Stable");
-        this.setRunAllSortsName("Lazicci Stable Sort");
-        this.setRunSortName("Lazicci Sort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     private int runs(int len) {
@@ -55,7 +48,7 @@ final public class LazicciSort extends GrailSorting {
 
     @Override
     public void grailRotate(int[] array, int pos, int len1, int len2) {
-        Rotations.cycleReverse(array, pos, len1, len2, 0.5, true, false);
+        Rotations.adaptable(array, pos, len1, len2, 0.5, true, false);
     }
 
     // taken from PDIPop
@@ -130,7 +123,7 @@ final public class LazicciSort extends GrailSorting {
                 continue;
             }
             if (d > 0) {
-                grailLazyMerge(array, s, r - s, y - r);
+                grailMergeWithoutBuffer(array, s, r - s, y - r);
             }
             if (d + 1 == z) {
                 s = y;
@@ -144,7 +137,7 @@ final public class LazicciSort extends GrailSorting {
     private void blockBack(int[] array, int start, int run, int end) {
         while (run > start) {
             int r = findSortedRunBW(array, start, run);
-            grailLazyMerge(array, r, run - r, end - run);
+            grailMergeWithoutBuffer(array, r, run - r, end - run);
             run = r;
         }
     }

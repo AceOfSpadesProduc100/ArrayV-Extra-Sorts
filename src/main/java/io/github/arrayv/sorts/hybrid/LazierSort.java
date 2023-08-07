@@ -1,8 +1,10 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.select.MaxHeapSort;
 import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.utils.IndexedRotations;
 
 /*
  *
@@ -29,20 +31,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  *
  */
-
+@SortMeta(name = "Lazier Stable")
 final public class LazierSort extends Sort {
 	public LazierSort(ArrayVisualizer arrayVisualizer) {
 		super(arrayVisualizer);
-
-		this.setSortListName("Lazier Stable");
-		this.setRunAllSortsName("Lazier Stable Sort");
-		this.setRunSortName("Lazier Sort");
-		this.setCategory("Hybrid Sorts");
-		this.setBucketSort(false);
-		this.setRadixSort(false);
-		this.setUnreasonablySlow(false);
-		this.setUnreasonableLimit(0);
-		this.setBogoSort(false);
 	}
 
 	private static int cbrt(int n) {
@@ -62,27 +54,8 @@ final public class LazierSort extends Sort {
 			Writes.swap(array, --b, --m, 1, true, false);
 	}
 
-	private void multiSwap(int[] array, int a, int b, int len) {
-		for (int i = 0; i < len; i++)
-			Writes.swap(array, a + i, b + i, 1, true, false);
-	}
-
 	private void rotate(int[] array, int a, int m, int b) {
-		int l = m - a, r = b - m;
-
-		while (l > 0 && r > 0) {
-			if (r < l) {
-				this.multiSwap(array, m - r, m, r);
-				b -= r;
-				m -= r;
-				l -= r;
-			} else {
-				this.multiSwap(array, a, m, l);
-				a += l;
-				m += l;
-				r -= l;
-			}
-		}
+		IndexedRotations.adaptable(array, a, m, b, 1.0, true, false);
 	}
 
 	private void insertTo(int[] array, int a, int b) {
@@ -136,7 +109,7 @@ final public class LazierSort extends Sort {
 			Delays.sleep(1);
 			int loc = this.leftBinSearch(array, p, pEnd, array[i]);
 
-			if (pEnd == loc || Reads.compareIndices(array, i, loc, 0.5, true) != 0) {
+			if (pEnd == loc || Reads.compareValues(array[i], array[loc]) != 0) {
 				this.rotate(array, p, pEnd, i);
 				int inc = i - pEnd;
 				loc += inc;
@@ -161,7 +134,7 @@ final public class LazierSort extends Sort {
 		int i = a, j = m, k;
 
 		while (i < j && j < b) {
-			if (Reads.compareIndices(array, i, j, 0.5, true) > 0) {
+			if (Reads.compareValues(array[i], array[j]) > 0) {
 				k = this.leftExpSearch(array, j + 1, b, array[i]);
 				this.rotate(array, i, j, k);
 
@@ -275,7 +248,7 @@ final public class LazierSort extends Sort {
 		int i = a, j = m;
 
 		while (i < m && j < b) {
-			if (Reads.compareIndices(array, i, j, 0.5, true) <= 0)
+			if (Reads.compareValues(array[i], array[j]) <= 0)
 				Writes.swap(array, p++, i++, 1, true, false);
 
 			else
@@ -293,7 +266,7 @@ final public class LazierSort extends Sort {
 		p--;
 
 		while (i >= a && j >= m) {
-			if (Reads.compareIndices(array, i, j, 0.5, true) > 0)
+			if (Reads.compareValues(array[i], array[j]) > 0)
 				Writes.swap(array, p--, i--, 1, true, false);
 
 			else
@@ -310,7 +283,7 @@ final public class LazierSort extends Sort {
 		int i = a, j = m, k = p;
 
 		while (j < b) {
-			while (i < p && Reads.compareIndices(array, i, j, 0.5, true) <= 0)
+			while (i < p && Reads.compareValues(array[i], array[j]) <= 0)
 				Writes.swap(array, k++, i++, 1, true, false);
 			if (i == p)
 				return;

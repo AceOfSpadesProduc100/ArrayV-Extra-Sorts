@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 import io.github.arrayv.utils.IndexedRotations;
 
@@ -18,19 +19,11 @@ Coded for ArrayV by Kiriko-chan
  * @author Kiriko-chan
  *
  */
+@SortMeta(name = "Lazier Quick")
 public final class LazierQuickSort extends Sort {
 
     public LazierQuickSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Lazier Stable Quick");
-        this.setRunAllSortsName("Lazier Stable Quick Sort");
-        this.setRunSortName("Lazier Quicksort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     class PivotPair {
@@ -138,7 +131,7 @@ public final class LazierQuickSort extends Sort {
     }
 
     protected void rotate(int[] array, int a, int m, int b) {
-        IndexedRotations.holyGriesMills(array, a, m, b, 1.0, true, false);
+        IndexedRotations.adaptable(array, a, m, b, 1.0, true, false);
     }
 
     protected void inPlaceMergeFW(int[] array, int a, int m, int b) {

@@ -1,13 +1,13 @@
-package sorts.misc;
+package io.github.arrayv.sorts.misc;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-import main.ArrayVisualizer;
-import sorts.insert.BlockInsertionSortNeon;
-import sorts.templates.Sort;
-import utils.IndexedRotations;
-import utils.Statistics;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.insert.BlockInsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.utils.IndexedRotations;
 
 /*
 
@@ -19,6 +19,7 @@ IN COLLABORATION WITH STENTOR AND DISTRAY
 ------------------------------
 
 */
+@SortMeta(name = "In-Place Optimized Safe Stalin", category = "Impractical Sorts", slowSort = true, unreasonableLimit = 8192)
 final public class OptimizedSafeStalinSort extends Sort {
 
     int firstlen;
@@ -26,28 +27,16 @@ final public class OptimizedSafeStalinSort extends Sort {
 
     public OptimizedSafeStalinSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("Optimized Safe Stalin");
-        this.setRunAllSortsName("Optimized Safe Stalin Sort");
-        this.setRunSortName("Optimized Safe Stalinsort");
-        this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(true);
-        this.setUnreasonableLimit(8192);
-        this.setBogoSort(false);
     }
 
     protected ArrayList<Stack<Integer>> buildStacks(int[] array, int start, int end) {
         ArrayList<Stack<Integer>> stacksBuilt = new ArrayList<>();
         int zero = Integer.MIN_VALUE, zeroed = 0;
-        while(zeroed < end-start) {
+        while (zeroed < end - start) {
             Stack<Integer> currentStack = new Stack<>();
-            Statistics.addStat("Stack");
-            for(int j=start; j<end; j++) {
-                if(array[j] != zero) {
-                    if(currentStack.empty() || Reads.compareValues(currentStack.peek(), array[j]) <= 0) {
+            for (int j = start; j < end; j++) {
+                if (array[j] != zero) {
+                    if (currentStack.empty() || Reads.compareValues(currentStack.peek(), array[j]) <= 0) {
                         currentStack.add(array[j]);
                         Writes.changeAllocAmount(1);
                         Writes.changeAuxWrites(1);
@@ -66,12 +55,14 @@ final public class OptimizedSafeStalinSort extends Sort {
     protected void reciteStacks(int[] array, int start, int end, ArrayList<Stack<Integer>> stacks) {
         int ptr = start;
         int stackdone = 0;
-        while(stacks.size() > 0) {
+        while (stacks.size() > 0) {
             Stack<Integer> first = stacks.remove(0);
-            if (stackdone == 0) firstlen = first.size();
-            if (stackdone == 1) secondlen = first.size();
+            if (stackdone == 0)
+                firstlen = first.size();
+            if (stackdone == 1)
+                secondlen = first.size();
             int n = ptr + first.size() - 1;
-            while(!first.empty()) {
+            while (!first.empty()) {
                 Writes.changeAllocAmount(-1);
                 Writes.write(array, n--, first.pop(), 1, true, false);
                 ptr++;
@@ -93,9 +84,8 @@ final public class OptimizedSafeStalinSort extends Sort {
 
     @Override
     public void runSort(int[] array, int currentLength, int bucketCount) {
-        BlockInsertionSortNeon two = new BlockInsertionSortNeon(arrayVisualizer);
+        BlockInsertionSort two = new BlockInsertionSort(arrayVisualizer);
         int workinglength = currentLength;
-        Statistics.putStat("Stack");
         boolean check = false;
         while (!check && workinglength > 1) {
             ArrayList<Stack<Integer>> stacks = buildStacks(array, 0, workinglength);
@@ -103,11 +93,11 @@ final public class OptimizedSafeStalinSort extends Sort {
             reciteStacks(array, 0, workinglength, stacks);
             if (size > 2) {
                 IndexedRotations.neon(array, 0, firstlen, workinglength, 1, true, false);
-                if (!check) workinglength -= stepDown(array, workinglength);
-                Statistics.resetStat("Stack");
+                if (!check)
+                    workinglength -= stepDown(array, workinglength);
             } else {
-                Statistics.resetStat("Stack");
-                if (size == 2) two.insertionSort(array, 0, workinglength);
+                if (size == 2)
+                    two.insertionSort(array, 0, workinglength);
                 check = true;
             }
         }

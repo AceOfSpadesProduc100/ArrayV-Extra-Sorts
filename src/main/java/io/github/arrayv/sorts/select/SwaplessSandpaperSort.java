@@ -1,7 +1,8 @@
-package sorts.select;
+package io.github.arrayv.sorts.select;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 MIT License
@@ -27,22 +28,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
+@SortMeta(name = "Swapless Sandpaper")
 final public class SwaplessSandpaperSort extends Sort {
     public SwaplessSandpaperSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("Swapless Sandpaper");
-        this.setRunAllSortsName("Swapless Sandpaper Sort");
-        this.setRunSortName("Swapn't Sandpapersort");
-        this.setCategory("Selection Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
+
     @Override
     public void runSort(int[] array, int currentLength, int bucketCount) {
         for (int i = 0; i < currentLength - 1; i++) {

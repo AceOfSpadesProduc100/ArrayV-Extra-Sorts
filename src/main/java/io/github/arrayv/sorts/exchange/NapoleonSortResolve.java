@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 import io.github.arrayv.sorts.insert.BlockInsertionSort;
 
@@ -14,21 +15,13 @@ FIXING ORIGINAL CODE BY ANONYMOUS0726
 ------------------------------
 
 */
+@SortMeta(name = "Napoleon (Fixed)", slowSort = true, unreasonableLimit = 1024, category = "Impractical Sorts")
 final public class NapoleonSortResolve extends Sort {
 
     int oob = 0;
 
     public NapoleonSortResolve(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Napoleon (Resolved)");
-        this.setRunAllSortsName("Napoleon Sort (Resolved)");
-        this.setRunSortName("Napoleon Sort (Resolved)");
-        this.setCategory("Impractical Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(true);
-        this.setUnreasonableLimit(1024);
-        this.setBogoSort(false);
     }
 
     private void tilsit(int[] array, int currentLen) {

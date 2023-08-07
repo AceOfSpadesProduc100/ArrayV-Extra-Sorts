@@ -1,25 +1,16 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 import io.github.arrayv.utils.Timer;
 
+@SortMeta(name = "Branchless Bubble")
 final public class BranchlessBubbleSort extends Sort {
     private Timer Timer;
 
     public BranchlessBubbleSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.Timer = arrayVisualizer.getTimer();
-        this.setSortListName("Branchless Bubble");
-        this.setRunAllSortsName("Branchless Bubble Sort");
-        this.setRunSortName("Branchless Bubblesort");
-        this.setCategory("Exchange Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     private boolean compSwap(int[] a, int l, int r) {
@@ -40,6 +31,7 @@ final public class BranchlessBubbleSort extends Sort {
     @Override
     public void runSort(int[] array, int length, int bucketCount) {
         boolean sorted = false;
+        Timer = arrayVisualizer.getTimer();
         for (int i = length - 1; i > 0 && !sorted; i--) {
             sorted = true;
             for (int j = 0; j < i; j++) {

@@ -51,13 +51,12 @@ final public class BaseNMergeSort extends Sort {
     }
 
     private int[] copyStarts(int[] starts, int baseCount) {
-        int[] copy = Writes.createExternalArray(baseCount);
+        int[] copy = new int[baseCount];
         Writes.changeAllocAmount(copy.length);
         for (int i = 0; i < baseCount; i++) {
             copy[i] = starts[i];
             Writes.write(copy, i, starts[i], 0, false, true);
         }
-        Writes.deleteExternalArray(starts);
         return copy;
     }
 
@@ -66,7 +65,8 @@ final public class BaseNMergeSort extends Sort {
             int startEnd = i == baseCount - 1 ? end : starts[i + 1];
             if (copiedStarts[i] < startEnd) {
                 Highlights.markArray(i + 1, copiedStarts[i]);
-            } else {
+            }
+            else {
                 Highlights.clearMark(i + 1);
             }
         }
@@ -96,7 +96,7 @@ final public class BaseNMergeSort extends Sort {
         }
         Highlights.clearAllMarks();
 
-        for (int i = 0; i < length; i++) {
+        for(int i = 0; i < length; i++){
             Writes.write(array, starts[0] + i, tmp[i], 1, true, false);
         }
 
@@ -122,7 +122,7 @@ final public class BaseNMergeSort extends Sort {
     }
 
     private int[] calculateStarts(int start, int length, int baseCount) {
-        int[] starts = Writes.createExternalArray(baseCount);
+        int[] starts = new int[baseCount];
         Writes.changeAllocAmount(starts.length);
         int size = length / baseCount;
         int current = start;
@@ -131,7 +131,7 @@ final public class BaseNMergeSort extends Sort {
             Writes.write(starts, i, current, 0, false, true);
             current += size;
         }
-        Writes.deleteExternalArray(starts);
+
         return starts;
     }
 
@@ -151,28 +151,30 @@ final public class BaseNMergeSort extends Sort {
         int low = start;
         int high = mid;
 
-        for (int nxt = 0; nxt < length; nxt++) {
-            if (low >= mid && high >= end)
-                break;
+        for(int nxt = 0; nxt < length; nxt++){
+            if(low >= mid && high >= end) break;
 
             Highlights.markArray(1, low);
             Highlights.markArray(2, high);
 
-            if (low < mid && high >= end) {
+            if(low < mid && high >= end){
                 Highlights.clearMark(2);
                 Writes.write(tmp, nxt, array[low++], 1, false, true);
-            } else if (low >= mid && high < end) {
+            }
+            else if(low >= mid && high < end){
                 Highlights.clearMark(1);
                 Writes.write(tmp, nxt, array[high++], 1, false, true);
-            } else if (Reads.compareIndices(array, low, high, 0.5, true) == -1) {
+            }
+            else if(Reads.compareValues(array[low], array[high]) == -1){
                 Writes.write(tmp, nxt, array[low++], 1, false, true);
-            } else {
+            }
+            else{
                 Writes.write(tmp, nxt, array[high++], 1, false, true);
             }
         }
         Highlights.clearMark(2);
 
-        for (int i = 0; i < length; i++) {
+        for(int i = 0; i < length; i++){
             Writes.write(array, start + i, tmp[i], 1, true, false);
         }
     }
@@ -180,7 +182,7 @@ final public class BaseNMergeSort extends Sort {
     private void baseNMerge(int[] array, int length, int baseCount) {
         boolean useBinary = false;
         double logBaseCount = logBase(baseCount, 2);
-        if (Math.pow(2, logBaseCount) == Math.pow(2, (int) logBaseCount)) {
+        if (Math.pow(2, logBaseCount) == Math.pow(2, (int)logBaseCount)) {
             useBinary = true;
         }
 
@@ -188,8 +190,8 @@ final public class BaseNMergeSort extends Sort {
 
         int lengthBase = useBinary ? 2 : baseCount;
         double logLength = logBase(length, lengthBase);
-        if (Math.pow(lengthBase, (int) logLength) < Math.pow(lengthBase, logLength)) {
-            start = (int) (length - Math.pow(lengthBase, (int) logLength));
+        if (Math.pow(lengthBase, (int)logLength) < Math.pow(lengthBase, logLength)) {
+            start = (int)(length - Math.pow(lengthBase, (int)logLength));
         }
 
         int[] starts = calculateStarts(start, length - start, baseCount);

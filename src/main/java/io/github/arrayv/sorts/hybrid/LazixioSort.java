@@ -1,20 +1,13 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.GrailSorting;
 
+@SortMeta(name = "Lazixio")
 final public class LazixioSort extends GrailSorting {
     public LazixioSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Lazixio Stable");
-        this.setRunAllSortsName("Lazixio Stable Sort");
-        this.setRunSortName("Lazixio Sort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     private int runs(int len) {
@@ -112,24 +105,24 @@ final public class LazixioSort extends GrailSorting {
         while (r < end) {
             int y = findRun(array, r, end);
             if (y >= r + x) {
-                grailLazyMerge(array, start, s - start, r - s);
-                grailLazyMerge(array, start, r - start, y - r);
+                grailMergeWithoutBuffer(array, start, s - start, r - s);
+                grailMergeWithoutBuffer(array, start, r - start, y - r);
                 s = r = y;
                 d = 0;
                 continue;
             }
             if (d > 0) {
-                grailLazyMerge(array, s, r - s, y - r);
+                grailMergeWithoutBuffer(array, s, r - s, y - r);
             }
             if (d + 1 == z) {
-                grailLazyMerge(array, start, s - start, y - s);
+                grailMergeWithoutBuffer(array, start, s - start, y - s);
                 s = y;
             }
             r = y;
             d = (d + 1) % z;
         }
         if (d > 0)
-            grailLazyMerge(array, start, s - start, r - s);
+            grailMergeWithoutBuffer(array, start, s - start, r - s);
     }
 
     @Override

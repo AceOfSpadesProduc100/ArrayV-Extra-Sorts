@@ -44,8 +44,12 @@ public final class WiggleSort extends Sort {
 
 		for (int i = leftPoint; i < midPoint; i++) {
 			for (int k = midPoint; k < end; k++) {
-				if (this.Reads.compareIndices(array, i, j, 0.1, true) >= 0) {
-					this.Writes.swap(array, i, j, 1, true, false);
+				this.Highlights.markArray(1, i);
+				this.Highlights.markArray(2, j);
+				if (this.Reads.compareValues(array[i], array[j]) >= 0) {
+					this.Writes.swap(array, i, j, 1.0D, true, false);
+				} else {
+					this.Delays.sleep(0.025D);
 				}
 
 				if (startLeft) {

@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /*
@@ -12,6 +13,7 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Mean Partition")
 public final class MeanPartitionSort extends Sort {
 
     boolean inlow;
@@ -19,15 +21,6 @@ public final class MeanPartitionSort extends Sort {
 
     public MeanPartitionSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("MPartition");
-        this.setRunAllSortsName("Mean Partition Sort");
-        this.setRunSortName("Mean Partitionsort");
-        this.setCategory("Exchange Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     protected int partition(int[] array, int start, int end) {
@@ -66,12 +59,9 @@ public final class MeanPartitionSort extends Sort {
 
     public void presumepartitions(int[] array, int start, int end, int depth) {
         if (end - start >= 2) {
-            Writes.recordDepth(depth);
             int m = partition(array, start, end);
             if (inlow && inhigh) {
-                Writes.recursion();
                 presumepartitions(array, start, start + m, depth + 1);
-                Writes.recursion();
                 presumepartitions(array, start + m, end, depth + 1);
             }
         }

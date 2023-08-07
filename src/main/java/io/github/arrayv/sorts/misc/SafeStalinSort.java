@@ -1,10 +1,11 @@
-package sorts.misc;
+package io.github.arrayv.sorts.misc;
 
 import java.util.Deque;
 import java.util.LinkedList;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -20,20 +21,10 @@ Help.
  - The Madhouse CEO
 
 */
+@SortMeta(name = "Safe Stalin", category = "Impractical Sorts", slowSort = true, unreasonableLimit = 1024)
 final public class SafeStalinSort extends Sort {
     public SafeStalinSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("Safe Stalin");
-        this.setRunAllSortsName("Safe Stalin Sort");
-        this.setRunSortName("Safe Stalinsort");
-        this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(true);
-        this.setUnreasonableLimit(1024);
-        this.setBogoSort(false);
     }
 
     protected void outsideAdd(Deque<Integer> outside, int x) {
@@ -86,7 +77,8 @@ final public class SafeStalinSort extends Sort {
                         remove(array, i, currentLength--);
                         getlen--;
                         auxlen++;
-                    } else i++;
+                    } else
+                        i++;
                 }
                 Highlights.clearMark(2);
                 for (int j = 0; j < auxlen; j++) {
@@ -100,8 +92,10 @@ final public class SafeStalinSort extends Sort {
             pass = true;
             while (!(verifyI == currentLength || !pass)) {
                 int compare = Reads.compareIndices(array, verifyI - 1, verifyI, 0.5, true);
-                if (compare <= 0) verifyI++;
-                else pass = false;
+                if (compare <= 0)
+                    verifyI++;
+                else
+                    pass = false;
             }
             if (!pass) {
                 i = verifyI;

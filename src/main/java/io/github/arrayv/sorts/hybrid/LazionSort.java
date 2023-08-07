@@ -1,8 +1,9 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.insert.BlockInsertionSort;
-import io.github.arrayv.sorts.insert.PDBinaryInsertionSort;
+import io.github.arrayv.sorts.insert.BinaryInsertionSort;
 import io.github.arrayv.sorts.templates.GrailSorting;
 
 /*
@@ -14,23 +15,14 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Lazion", question = "Enter the base for this sort:", defaultAnswer = 2)
 final public class LazionSort extends GrailSorting {
 
     BlockInsertionSort blocksert = new BlockInsertionSort(arrayVisualizer);
-    PDBinaryInsertionSort binsert = new PDBinaryInsertionSort(arrayVisualizer);
+    BinaryInsertionSort binsert = new BinaryInsertionSort(arrayVisualizer);
 
     public LazionSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Lazion Stable");
-        this.setRunAllSortsName("Lazion Stable Sort");
-        this.setRunSortName("Lazion Sort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
-        this.setQuestion("Enter the base for this sort:", 2);
     }
 
     protected int powlte(int value, int base) {
@@ -43,7 +35,7 @@ final public class LazionSort extends GrailSorting {
     protected void merge(int[] array, int start, int end, int base) {
         int blockLen = (end - start) / base;
         for (int i = start; i + blockLen < end; i += blockLen) {
-            grailLazyMerge(array, start, i - start + blockLen, blockLen);
+            grailMergeWithoutBuffer(array, start, i - start + blockLen, blockLen);
         }
     }
 
@@ -75,10 +67,10 @@ final public class LazionSort extends GrailSorting {
         int blockLen = powlte((int) Math.sqrt(currentLength), base);
         int i;
         for (i = 0; i + blockLen <= currentLength; i += blockLen) {
-            binsert.pdbinsert(array, i, i + blockLen, 0.5, false);
+            binsert.customBinaryInsert(array, i, i + blockLen, 0.5);
         }
         if (i < currentLength)
-            binsert.pdbinsert(array, i, currentLength, 0.5, false);
+            binsert.customBinaryInsert(array, i, currentLength, 0.5);
         mergesLen(array, 0, currentLength, blockLen, base);
     }
 }

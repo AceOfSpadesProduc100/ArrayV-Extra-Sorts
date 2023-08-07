@@ -1,22 +1,14 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.BogoSorting;
 
+@SortMeta(name = "Ford", unreasonableLimit = 8192, slowSort = true, category = "Impractical Sorts")
 public final class FordSort extends BogoSorting {
 
     public FordSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        setSortListName("Ford");
-        setRunAllSortsName("Ford Sort");
-        setRunSortName("Ford Sort");
-        setCategory("Exchange Sorts");
-
-        setBucketSort(false);
-        setRadixSort(false);
-        setUnreasonablySlow(true);
-        setUnreasonableLimit(8192);
-        setBogoSort(false);
 
     }
 

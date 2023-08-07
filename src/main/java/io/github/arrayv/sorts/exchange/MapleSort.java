@@ -3,6 +3,7 @@ package io.github.arrayv.sorts.exchange;
 import io.github.arrayv.sorts.templates.Sort;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 
 /* _________________________
   /                         \
@@ -10,19 +11,10 @@ import io.github.arrayv.main.ArrayVisualizer;
  |       and Sort Grid       |
  |(AKA: MapleMagicShovySeas) |
   \_________________________/ */
+@SortMeta(name = "Maple")
 final public class MapleSort extends Sort {
 	public MapleSort(ArrayVisualizer arrayVisualizer) {
 		super(arrayVisualizer);
-
-		this.setSortListName("Maple");
-		this.setRunAllSortsName("Maple Sort");
-		this.setRunSortName("Maple Sort");
-		this.setCategory("Exchange Sorts");
-		this.setBucketSort(false);
-		this.setRadixSort(false);
-		this.setUnreasonablySlow(false);
-		this.setUnreasonableLimit(0);
-		this.setBogoSort(false);
 	}
 
 	@Override

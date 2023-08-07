@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.HashMap;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /**************************************
@@ -17,21 +18,10 @@ import io.github.arrayv.sorts.templates.Sort;
  * 
  * @author Distay *
  **************************************/
-
+@SortMeta(name = "More Optimized Pigeonhole")
 final public class MoreOptimizedPigeonholeSort extends Sort {
     public MoreOptimizedPigeonholeSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("More Optimized Pigeonhole");
-        this.setRunAllSortsName("More Optimized Pigeonhole Sort");
-        this.setRunSortName("More Optimized Pigeonhole Sort");
-        this.setCategory("Distribution Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     private BigInteger bitlist;

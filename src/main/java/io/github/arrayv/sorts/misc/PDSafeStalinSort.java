@@ -1,13 +1,14 @@
-package sorts.misc;
+package io.github.arrayv.sorts.misc;
 
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Stack;
 
-import main.ArrayVisualizer;
-import sorts.insert.BlockInsertionSortNeonLessInsert;
-import sorts.templates.Sort;
-import utils.IndexedRotations;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.insert.BlockInsertionSort;
+import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.utils.IndexedRotations;
 
 /*
 
@@ -27,20 +28,11 @@ in collaboration with Distray, PCBoy and stentor
  * @author stentor
  *
  */
+@SortMeta(name = "Pattern-Defeating Safe Stalin", category = "Impractical Sorts", slowSort = true, unreasonableLimit = 8192)
 public final class PDSafeStalinSort extends Sort {
 
     public PDSafeStalinSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Pattern-Defeating Safe Stalin");
-        this.setRunAllSortsName("Pattern-Defeating Safe Stalin Sort");
-        this.setRunSortName("Pattern-Defeating Safe Stalinsort");
-        this.setCategory("Impractical Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(true);
-        this.setUnreasonableLimit(8192);
-        this.setBogoSort(false);
     }
 
     int firstlen;
@@ -49,13 +41,20 @@ public final class PDSafeStalinSort extends Sort {
     protected int findRun(int[] array, int a, int b) {
         int i = a + 1;
         boolean dir;
-        if (i < b) dir = Reads.compareIndices(array, i - 1, i++, 0.5, true) <= 0;
-        else dir = true;
-        if (dir) while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) <= 0) i++;
+        if (i < b)
+            dir = Reads.compareIndices(array, i - 1, i++, 0.5, true) <= 0;
+        else
+            dir = true;
+        if (dir)
+            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) <= 0)
+                i++;
         else {
-            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) >= 0) i++;
-            if (i - a < 4) Writes.swap(array, a, i - 1, 1.0, true, false);
-            else Writes.reversal(array, a, i - 1, 1.0, true, false);
+            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) >= 0)
+                i++;
+            if (i - a < 4)
+                Writes.swap(array, a, i - 1, 1.0, true, false);
+            else
+                Writes.reversal(array, a, i - 1, 1.0, true, false);
         }
         Highlights.clearMark(2);
         return i;
@@ -66,7 +65,8 @@ public final class PDSafeStalinSort extends Sort {
         boolean noSort = true;
         while (i < b) {
             i = findRun(array, j, b);
-            if (i < b) noSort = false;
+            if (i < b)
+                noSort = false;
             j = i++;
         }
         return noSort;
@@ -99,8 +99,10 @@ public final class PDSafeStalinSort extends Sort {
         int stackdone = 0;
         while (stacks.size() > 0) {
             Stack<Integer> first = stacks.remove(0);
-            if (stackdone == 0) firstlen = first.size();
-            if (stackdone == 1) secondlen = first.size();
+            if (stackdone == 0)
+                firstlen = first.size();
+            if (stackdone == 1)
+                secondlen = first.size();
             int n = ptr + first.size() - 1;
             while (!first.empty()) {
                 Writes.changeAllocAmount(-1);
@@ -124,8 +126,9 @@ public final class PDSafeStalinSort extends Sort {
 
     @Override
     public void runSort(int[] array, int length, int bucketCount) {
-        if(patternDefeat(array, 0, length)) return;
-        BlockInsertionSortNeonLessInsert two = new BlockInsertionSortNeonLessInsert(arrayVisualizer);
+        if (patternDefeat(array, 0, length))
+            return;
+        BlockInsertionSort two = new BlockInsertionSort(arrayVisualizer);
         int n = length;
         boolean check = false;
         BitSet bits = new BitSet(length);
@@ -135,9 +138,11 @@ public final class PDSafeStalinSort extends Sort {
             reciteStacks(array, 0, n, stacks);
             if (size > 2) {
                 IndexedRotations.neon(array, 0, firstlen, n, 1, true, false);
-                if (!check) n -= stepDown(array, n);
+                if (!check)
+                    n -= stepDown(array, n);
             } else {
-                if (size == 2) two.insertionSort(array, 0, n);
+                if (size == 2)
+                    two.insertionSort(array, 0, n);
                 check = true;
             }
         }

@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /*
@@ -12,18 +13,10 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Debris (Equality)")
 final public class DebrisSortEquality extends Sort {
     public DebrisSortEquality(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Debris (Equality)");
-        this.setRunAllSortsName("Equal Debris Sort");
-        this.setRunSortName("Equal Debris Sort");
-        this.setCategory("Exchange Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     protected void stableSegmentReversal(int[] array, int start, int end) {

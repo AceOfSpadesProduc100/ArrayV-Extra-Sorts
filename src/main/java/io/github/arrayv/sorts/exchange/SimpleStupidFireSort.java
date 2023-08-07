@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /*
@@ -13,18 +14,10 @@ FROM A VARIANT OF STUPID FIRE SORT BY NAOAN1201
 ------------------------------
 
 */
+@SortMeta(name = "Simple Stupid Fire", unreasonableLimit = 128, slowSort = true, category = "Impractical Sorts")
 final public class SimpleStupidFireSort extends Sort {
     public SimpleStupidFireSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Simple Stupid Fire");
-        this.setRunAllSortsName("Simple Stupid Fire Sort");
-        this.setRunSortName("Simple Stupid Fire Sort");
-        this.setCategory("Impractical Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(true);
-        this.setUnreasonableLimit(128);
-        this.setBogoSort(false);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
-import io.github.arrayv.sorts.insert.InsertionSort;
+import io.github.arrayv.sorts.insert.UnstableInsertionSort;
 import io.github.arrayv.sorts.select.PoplarHeapSort;
 import io.github.arrayv.sorts.templates.Sort;
 
@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 final public class LAQuickSort extends Sort {
     PoplarHeapSort heapSorter;
-    InsertionSort insertSorter;
+    UnstableInsertionSort insertSorter;
 
     public LAQuickSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
@@ -40,25 +40,23 @@ final public class LAQuickSort extends Sort {
     public int partition(int[] array, int a, int b, int p) {
         int i = a - 1;
         int j = b;
-        Highlights.markArray(3, p);
+		Highlights.markArray(3, p);
 
-        while (true) {
+        while(true) {
             i++;
-            while (i < b && Reads.compareIndices(array, i, p, 0, false) == -1) {
+            while(i < b && Reads.compareIndices(array, i, p, 0, false) == -1) {
                 Highlights.markArray(1, i);
                 Delays.sleep(0.25);
                 i++;
             }
             j--;
-            while (j >= a && Reads.compareIndices(array, j, p, 0, false) == 1) {
+            while(j >= a && Reads.compareIndices(array, j, p, 0, false) == 1) {
                 Highlights.markArray(2, j);
                 Delays.sleep(0.25);
                 j--;
             }
-            if (i < j)
-                Writes.swap(array, i, j, 1, true, false);
-            else
-                return j;
+            if(i < j) Writes.swap(array, i, j, 1, true, false);
+            else      return j;
         }
     }
 
@@ -81,34 +79,34 @@ final public class LAQuickSort extends Sort {
     }
 
     public int log2(int N) {
-        int result = (int) (Math.log(N) / Math.log(2));
+        int result = (int)(Math.log(N) / Math.log(2));
         return result;
     }
 
     private void medianOfThree(int[] array, int a, int b) {
-        int m = a + (b - 1 - a) / 2;
+		int m = a+(b-1-a)/2;
 
-        if (Reads.compareIndices(array, a, m, 1, true) == 1)
-            Writes.swap(array, a, m, 1, true, false);
+		if(Reads.compareIndices(array, a, m, 1, true) == 1)
+			Writes.swap(array, a, m, 1, true, false);
 
-        if (Reads.compareIndices(array, m, b - 1, 1, true) == 1) {
-            Writes.swap(array, m, b - 1, 1, true, false);
+		if(Reads.compareIndices(array, m, b-1, 1, true) == 1) {
+			Writes.swap(array, m, b-1, 1, true, false);
 
-            if (Reads.compareIndices(array, a, m, 1, true) == 1)
-                return;
-        }
+			if(Reads.compareIndices(array, a, m, 1, true) == 1)
+				return;
+		}
 
-        Writes.swap(array, a, m, 1, true, false);
-    }
+		Writes.swap(array, a, m, 1, true, false);
+	}
 
     public int logarithmicAverage(int[] arr, int low, int high) {
         int sum = 0;
         int counter = 0;
-        int qta = this.log2(high - low);
+        int qta = this.log2(high-low);
         if (2 > qta) {
             qta = 2;
         }
-        for (int i = low; i < high; i += ((high - low) / qta)) {
+        for (int i = low; i < high; i += ((high-low) / qta)) {
             Highlights.markArray(0, i);
             Delays.sleep(1);
             sum += arr[i];
@@ -125,37 +123,31 @@ final public class LAQuickSort extends Sort {
         boolean sorted = true;
         int comp;
 
-        for (int i = start; i < end - 1; i++) {
-            comp = Reads.compareIndices(array, i, i + 1, 0.5, true);
-            if (comp > 0)
-                sorted = false;
-            else
-                reverseSorted = false;
-            if ((!reverseSorted) && (!sorted))
-                return false;
+        for (int i = start; i < end-1; i++) {
+            comp = Reads.compareIndices(array, i, i+1, 0.5, true);
+            if (comp > 0) sorted = false;
+            else reverseSorted = false;
+            if ((!reverseSorted) && (!sorted)) return false;
         }
 
         if (reverseSorted && !sorted) {
-            Writes.reversal(array, start, end - 1, 1, true, false);
+            Writes.reversal(array, start, end-1, 1, true, false);
             sorted = true;
         }
 
         return sorted;
     }
 
-    public void quickSort(int[] arr, int low, int high, int depthLimit, int backPivot, boolean logAvg,
-            int equalPivotCount) {
-        if (this.getSortedRuns(arr, low, high))
-            return;
-        if (high - low > 16) {
+    public void quickSort(int[] arr, int low, int high, int depthLimit, int backPivot, boolean logAvg, int equalPivotCount) {
+        if (this.getSortedRuns(arr, low, high)) return;
+        if (high-low > 16) {
             int pi = low, pivot = low;
             if (!logAvg) {
                 this.medianOfThree(arr, low, high);
                 pi = this.partition(arr, low, high, low);
-                int left = pi - low;
-                int right = high - (pi + 1);
-                if ((left == 0 || right == 0) || (left / right >= 16 || right / left >= 16))
-                    logAvg = true;
+                int left  = pi-low;
+                int right = high-(pi+1);
+                if ((left == 0 || right == 0) || (left/right >= 16 || right/left >= 16)) logAvg = true;
                 else {
                     Writes.swap(arr, low, pi, 1, true, false);
                     pivot = arr[pi];
@@ -165,27 +157,25 @@ final public class LAQuickSort extends Sort {
                 pivot = this.logarithmicAverage(arr, low, high);
                 pi = this.ghostPartition(arr, low, high, pivot);
             }
-            if (backPivot == pivot)
-                equalPivotCount++;
-            if (depthLimit == 0 || equalPivotCount > 4) {
-                if (equalPivotCount > 4)
-                    equalPivotCount = 0;
+            if (backPivot == pivot) equalPivotCount++;
+            if (depthLimit == 0 || equalPivotCount > 4){
+                if (equalPivotCount > 4) equalPivotCount = 0;
                 heapSorter.heapSort(arr, low, high);
                 return;
             }
             depthLimit--;
             this.quickSort(arr, low, pi, depthLimit, pivot, logAvg, equalPivotCount);
-            this.quickSort(arr, pi + (logAvg ? 0 : 1), high, depthLimit, pivot, logAvg, equalPivotCount);
+            this.quickSort(arr, pi+(logAvg ? 0 : 1), high, depthLimit, pivot, logAvg, equalPivotCount);
         } else {
-            insertSorter.customInsertSort(arr, low, high, 0.5, false);
+            insertSorter.unstableInsertionSort(arr, low, high);
         }
     }
 
     @Override
     public void runSort(int[] array, int currentLength, int bucketCount) {
         heapSorter = new PoplarHeapSort(arrayVisualizer);
-        insertSorter = new InsertionSort(arrayVisualizer);
+        insertSorter = new UnstableInsertionSort(arrayVisualizer);
 
-        this.quickSort(array, 0, currentLength, 2 * log2(currentLength), array[1], false, 0);
+        this.quickSort(array, 0, currentLength, 2*log2(currentLength), array[1], false, 0);
     }
 }

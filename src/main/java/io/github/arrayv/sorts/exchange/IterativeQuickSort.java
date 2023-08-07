@@ -1,15 +1,17 @@
 /**
  *
  */
-package io.github.arrayv.sorts.quick;
+package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /**
  * @author McDude_73
  *
  */
+@SortMeta(name = "Iterative Quick")
 public final class IterativeQuickSort extends Sort {
 
     /**
@@ -17,15 +19,6 @@ public final class IterativeQuickSort extends Sort {
      */
     public IterativeQuickSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        setSortListName("Iterative Quick (alt)");
-        setRunAllSortsName("Iterative Quick Sort");
-        setRunSortName("Iterative Quicksort");
-        setCategory("Quick Sorts");
-        setBucketSort(false);
-        setRadixSort(false);
-        setUnreasonablySlow(false);
-        setUnreasonableLimit(0);
-        setBogoSort(false);
 
     }
 
@@ -71,9 +64,15 @@ public final class IterativeQuickSort extends Sort {
             return start;
         while (true) {
             while (Reads.compareValues(a[up], part) < 0) {
+                Highlights.markArray(0, up);
+                Highlights.markArray(1, part);
+                Delays.sleep(0.5);
                 up++;
             }
             while (Reads.compareValues(part, a[down]) < 0 && up < down) {
+                Highlights.markArray(0, down);
+                Highlights.markArray(1, part);
+                Delays.sleep(0.5);
                 down--;
             }
             if (up >= down)

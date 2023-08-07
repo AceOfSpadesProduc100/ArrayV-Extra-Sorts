@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.insert.BinaryDoubleInsertionSort;
 import io.github.arrayv.sorts.select.MaxHeapSort;
 import io.github.arrayv.sorts.templates.Sort;
@@ -9,21 +10,10 @@ import io.github.arrayv.sorts.templates.Sort;
  * Miepurge Sort: Min Heap Merge Sort, taking O(n+k) aux,
  * and slightly less time when finding mins compared to BaseNMerge
  */
-
+@SortMeta(name = "Miepurge (K-Way Heap Merge)", question = "Set the miepurge base of the sort:", defaultAnswer = 16)
 final public class MiepurgeSort extends Sort {
     public MiepurgeSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("Miepurge");
-        this.setRunAllSortsName("Miepurge Sort (K-Way Heap Merge Sort)");
-        this.setRunSortName("Miepurge Sort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setQuestion("Set the miepurge base of the sort:", 16);
-        this.setBogoSort(false);
     }
 
     public BinaryDoubleInsertionSort smallSort;
@@ -41,7 +31,7 @@ final public class MiepurgeSort extends Sort {
             if (tabComp(array, table, root - 1, leaf - 1) == 1) {
                 Highlights.markArray(1, root - 1);
                 Highlights.markArray(2, leaf - 1);
-                Writes.swap(table, root - 1, leaf - 1, 5, true, true);
+                Writes.swap(table, root - 1, leaf - 1, 1, true, true);
                 root = leaf;
             } else
                 break;
@@ -84,11 +74,11 @@ final public class MiepurgeSort extends Sort {
             do {
                 if (table[0] < ptrs[now]) {
                     Highlights.markArray(3, table[0]);
-                    Writes.write(tmp, k++, array[table[0]++], 1, true, true);
+                    Writes.write(tmp, k++, array[table[0]++], 0.5, true, true);
                 }
             } while (table[0] < ptrs[now] && tabComp(array, table, 0, secondMin) <= 0);
             if (table[0] >= ptrs[now]) {
-                Writes.swap(table, 0, table.length - 1, 5, true, true);
+                Writes.swap(table, 0, table.length - 1, 1, true, true);
                 table = remove(table, table.length - 1);
             }
             this.sift(array, 1, table);
@@ -129,8 +119,7 @@ final public class MiepurgeSort extends Sort {
         this.kWayMerge(array, aux);
     }
 
-    @Override
-    public int validateAnswer(int answer) {
+    public static int validateAnswer(int answer) {
         if (answer < 2)
             return 2;
         return answer;
@@ -140,7 +129,6 @@ final public class MiepurgeSort extends Sort {
     public void runSort(int[] array, int length, int bucketCount) {
         this.smallSort = new BinaryDoubleInsertionSort(arrayVisualizer);
         threshold = (int) Math.pow(length, 21 / 28d); // ?????
-        this.setRunAllSortsName("Miepurge Sort (K-Way Heap Merge Sort), Base " + bucketCount);
         this.miepurge(array, 0, length, bucketCount);
     }
 }

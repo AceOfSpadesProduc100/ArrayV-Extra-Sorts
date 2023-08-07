@@ -1,5 +1,4 @@
 package io.github.arrayv.sorts.exchange;
-
 import io.github.arrayv.main.ArrayVisualizer;
 import io.github.arrayv.sorts.templates.Sort;
 
@@ -38,15 +37,14 @@ final public class XSort extends Sort {
 			anyswaps = false;
 			i = 1;
 			while ((i - 1) + gap < currentLength) {
-				if (Reads.compareIndices(array, i - 1, (i - 1) + gap, 0.5, true) > 0) {
+				if (Reads.compareValues(array[i - 1], array[(i - 1) + gap]) > 0) {
 					Writes.swap(array, i - 1, (i - 1) + gap, 0.001, true, false);
 					anyswaps = true;
 					xleft = i + 1;
 					xright = i + gap - 1;
 					if (gap != 1) {
 						for (int r = 0; r < gap - 1; r++) {
-							if (Reads.compareIndices(array, xleft - 1, xright - 1, 0.5, true) > 0)
-								Writes.swap(array, xleft - 1, xright - 1, 0.001, true, false);
+							if (Reads.compareValues(array[xleft - 1], array[xright - 1]) > 0) Writes.swap(array, xleft - 1, xright - 1, 0.001, true, false);
 							xleft++;
 							xright--;
 						}
@@ -54,10 +52,8 @@ final public class XSort extends Sort {
 				}
 				i++;
 			}
-			if (gap == 1 && !anyswaps)
-				testpass = true;
-			else if (gap != 1 && !anyswaps)
-				gap--;
+			if (gap == 1 && !anyswaps) testpass = true;
+			else if (gap != 1 && !anyswaps) gap--;
 		}
 	}
 }

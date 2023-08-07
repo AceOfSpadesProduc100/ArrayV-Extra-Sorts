@@ -1,8 +1,9 @@
-package sorts.quick;
+package io.github.arrayv.sorts.quick;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
-import utils.IndexedRotations;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
+import io.github.arrayv.utils.IndexedRotations;
 
 /*
 
@@ -18,20 +19,11 @@ Coded for ArrayV by Kiriko-chan
  * @author Kiriko-chan
  *
  */
+@SortMeta(name = "Lazy Stable Ternary Quick")
 public final class LazyStableTernaryQuickSort extends Sort {
 
     public LazyStableTernaryQuickSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        setSortListName("Lazy Stable Ternary Quick");
-        setRunAllSortsName("Lazy Stable Ternary Quick Sort");
-        setRunSortName("Lazy Stable Ternary Quicksort");
-        setCategory("Quick Sorts");
-        setComparisonBased(true);
-        setBucketSort(false);
-        setRadixSort(false);
-        setUnreasonablySlow(false);
-        setUnreasonableLimit(0);
-        setBogoSort(false);
     }
 
     class PivotPair {
@@ -137,10 +129,12 @@ public final class LazyStableTernaryQuickSort extends Sort {
     protected void insertSort(int[] array, int a, int b) {
         int i = a + 1;
         if (Reads.compareIndices(array, i - 1, i++, 0.5, true) > 0) {
-            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) > 0) i++;
+            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) > 0)
+                i++;
             Writes.reversal(array, a, i - 1, 1.0, true, false);
         } else
-            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) <= 0) i++;
+            while (i < b && Reads.compareIndices(array, i - 1, i, 0.5, true) <= 0)
+                i++;
         Highlights.clearMark(2);
         for (; i < b; i++)
             insertTo(array, i, rightExpSearch(array, a, i, array[i]));
@@ -175,10 +169,12 @@ public final class LazyStableTernaryQuickSort extends Sort {
         boolean noSort = true;
         while (i < b) {
             if (Reads.compareIndices(array, i - 1, i++, 1, true) > 0) {
-                while (i < b && Reads.compareIndices(array, i - 1, i, 1, true) > 0) i++;
+                while (i < b && Reads.compareIndices(array, i - 1, i, 1, true) > 0)
+                    i++;
                 Writes.reversal(array, j, i - 1, 1, true, false);
             } else
-                while (i < b && Reads.compareIndices(array, i - 1, i, 1, true) <= 0) i++;
+                while (i < b && Reads.compareIndices(array, i - 1, i, 1, true) <= 0)
+                    i++;
             if (i < b) {
                 noSort = false;
                 j = i - (i - j - 1) % mRun - 1;
@@ -231,7 +227,8 @@ public final class LazyStableTernaryQuickSort extends Sort {
 
     public void lazyStableSort(int[] array, int a, int b) {
         int mRun = b - a;
-        for (; mRun >= 32; mRun = (mRun + 1) / 2);
+        for (; mRun >= 32; mRun = (mRun + 1) / 2)
+            ;
         if (buildRuns(array, a, b, mRun))
             return;
         for (int i, j = mRun; j < (b - a); j *= 2) {

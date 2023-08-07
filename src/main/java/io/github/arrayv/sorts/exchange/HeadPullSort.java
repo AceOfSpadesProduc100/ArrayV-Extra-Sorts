@@ -1,8 +1,6 @@
 package io.github.arrayv.sorts.exchange;
-
 import io.github.arrayv.main.ArrayVisualizer;
 import io.github.arrayv.sorts.templates.Sort;
-
 /*
 
 PORTED TO ARRAYV BY PCBOYGAMES
@@ -48,7 +46,6 @@ final public class HeadPullSort extends Sort {
 		this.setUnreasonableLimit(32);
 		this.setBogoSort(false);
 	}
-
 	@Override
 	public void runSort(int[] array, int currentLength, int bucketCount) {
 		int i = 1;
@@ -58,15 +55,14 @@ final public class HeadPullSort extends Sort {
 			Highlights.markArray(1, i - 1);
 			Highlights.markArray(2, i);
 			Delays.sleep(0.1);
-			if (Reads.compareIndices(array, i - 1, i, 0.5, true) > 0) {
+			if (Reads.compareValues(array[i - 1], array[i]) > 0) {
 				pull = i;
 				while (pull > 0) {
 					Writes.swap(array, pull - 1, pull, 0.1, true, false);
 					pull--;
 				}
 				i = 1;
-			} else
-				i++;
+			} else i++;
 		}
 	}
 }

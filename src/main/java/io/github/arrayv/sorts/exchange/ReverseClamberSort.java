@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /*
@@ -12,18 +13,10 @@ PORTED TO ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Reverse Clamber")
 final public class ReverseClamberSort extends Sort {
     public ReverseClamberSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Reverse Clamber");
-        this.setRunAllSortsName("Reverse Clamber Sort");
-        this.setRunSortName("Reverse Clambersort");
-        this.setCategory("Exchange Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     @Override

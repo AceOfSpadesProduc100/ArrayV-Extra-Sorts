@@ -30,7 +30,7 @@ SOFTWARE.
  *
  */
 
-public class ThreadedPDMergeSort extends OptimizedPDMergeSort {
+public class ThreadedPDMergeSort extends BinaryPDMergeSort {
     final int MAX_THREADS = 24;
     volatile int threadCount;
     volatile ReentrantLock countLock;
@@ -142,7 +142,7 @@ public class ThreadedPDMergeSort extends OptimizedPDMergeSort {
                     }
                 }
             }
-            for (int i = 1, j = 2; i < runCount; i++, j += 2, runCount--) {
+            for (int i = 1, j = 2; i < runCount; i++, j+=2, runCount--) {
                 Writes.write(runs, i, runs[j], 0.5, true, true);
             }
         }

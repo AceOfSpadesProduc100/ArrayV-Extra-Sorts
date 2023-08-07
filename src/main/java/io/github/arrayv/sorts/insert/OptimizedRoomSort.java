@@ -1,7 +1,8 @@
-package sorts.insert;
+package io.github.arrayv.sorts.insert;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -12,6 +13,7 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Optimized Room")
 final public class OptimizedRoomSort extends Sort {
 
     int first;
@@ -19,16 +21,6 @@ final public class OptimizedRoomSort extends Sort {
 
     public OptimizedRoomSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Optimized Room");
-        this.setRunAllSortsName("Optimized Room Sort");
-        this.setRunSortName("Optimized Roomsort");
-        this.setCategory("Insertion Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     protected int binarySearch(int[] array, int a, int b, int value) {
@@ -38,8 +30,10 @@ final public class OptimizedRoomSort extends Sort {
             Highlights.markArray(3, m);
             Highlights.markArray(2, b);
             Delays.sleep(0.015);
-            if (Reads.compareValues(value, array[m]) < 0) b = m;
-            else a = m + 1;
+            if (Reads.compareValues(value, array[m]) < 0)
+                b = m;
+            else
+                a = m + 1;
         }
         Highlights.clearMark(3);
         return a;
@@ -53,10 +47,12 @@ final public class OptimizedRoomSort extends Sort {
                 inserts = true;
                 int item = array[i];
                 int left = i - gap > start ? i - gap : start;
-                if (Reads.compareValues(array[left], item) <= 0) left = binarySearch(array, left + 1, i - 1, item);
+                if (Reads.compareValues(array[left], item) <= 0)
+                    left = binarySearch(array, left + 1, i - 1, item);
                 Highlights.clearAllMarks();
                 Highlights.markArray(2, left);
-                for (int right = i; right > left; right--) Writes.write(array, right, array[right - 1], 0.015, true, false);
+                for (int right = i; right > left; right--)
+                    Writes.write(array, right, array[right - 1], 0.015, true, false);
                 Writes.write(array, left, item, 0.015, true, false);
                 if (!firstfound) {
                     first = left;

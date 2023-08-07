@@ -1,34 +1,25 @@
-package sorts.insert;
+package io.github.arrayv.sorts.insert;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
 
-
+//
+@SortMeta(name = "Inverse Insertion")
 final public class InverseInsertionSort extends Sort {
     public InverseInsertionSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("Inverse Insertion");
-        this.setRunAllSortsName("Inverse Insertion Sort");
-        this.setRunSortName("Inverse Insertsort");
-        this.setCategory("Insertion Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     public void customInverseInsert(int[] array, int start, int end, double sleep, boolean aux) {
-        for(int i=start+1; i<end; i++) {
-            int j = end-1, t = array[j];
-            while(j >= i || (j >= start && Reads.compareValues(array[j], t) >= 0)) {
-                if(j-1 >= start)
-                    Writes.write(array, j, array[j-1], sleep, true, aux);
+        for (int i = start + 1; i < end; i++) {
+            int j = end - 1, t = array[j];
+            while (j >= i || (j >= start && Reads.compareValues(array[j], t) >= 0)) {
+                if (j - 1 >= start)
+                    Writes.write(array, j, array[j - 1], sleep, true, aux);
                 j--;
             }
-            Writes.write(array, j+1, t, sleep, true, aux);
+            Writes.write(array, j + 1, t, sleep, true, aux);
         }
     }
 

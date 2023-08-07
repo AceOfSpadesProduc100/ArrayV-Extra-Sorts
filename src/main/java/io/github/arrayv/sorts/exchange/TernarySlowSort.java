@@ -24,7 +24,7 @@ public final class TernarySlowSort extends Sort {
     }
 
     private void compareSwap(int[] array, int start, int end, int sleep) {
-        if (this.Reads.compareIndices(array, start, end, 0.5, true) == 1) {
+        if (this.Reads.compareValues(array[start], array[end]) == 1) {
             this.Writes.swap(array, start, end, sleep, true, false);
         }
         this.Highlights.markArray(1, start);

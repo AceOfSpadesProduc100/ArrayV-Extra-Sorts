@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.insert.InsertionSort;
 import io.github.arrayv.sorts.templates.Sort;
 
@@ -8,20 +9,11 @@ import io.github.arrayv.sorts.templates.Sort;
  * @author yuji
  *
  */
+@SortMeta(name = "Miysikyu")
 public final class MiyskiyuSort extends Sort {
 
     public MiyskiyuSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        setSortListName("Miyskiyu");
-        setRunAllSortsName("Miyskiyu Sort");
-        setRunSortName("Miyskiyusort");
-        setCategory("Hybrid Sorts");
-
-        setBucketSort(false);
-        setRadixSort(false);
-        setUnreasonablySlow(false);
-        setUnreasonableLimit(0);
-        setBogoSort(false);
     }
 
     protected boolean compSwap(int[] array, int a, int b) {

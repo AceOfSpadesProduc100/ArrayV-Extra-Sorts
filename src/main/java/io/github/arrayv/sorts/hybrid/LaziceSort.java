@@ -1,22 +1,15 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 import io.github.arrayv.utils.IndexedRotations;
 
+@SortMeta(name = "Lazice")
 public final class LaziceSort extends Sort {
 
     public LaziceSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Lazice Stable");
-        this.setRunAllSortsName("Lazice Stable Sort");
-        this.setRunSortName("Lazice Sort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     protected int leftBinSearch(int[] array, int a, int b, int val) {
@@ -46,7 +39,7 @@ public final class LaziceSort extends Sort {
     }
 
     protected void rotate(int[] array, int a, int m, int b) {
-        IndexedRotations.cycleReverse(array, a, m, b, 0.5, true, false);
+        IndexedRotations.adaptable(array, a, m, b, 0.5, true, false);
     }
 
     protected void inPlaceMergeFW(int[] array, int a, int m, int b) {

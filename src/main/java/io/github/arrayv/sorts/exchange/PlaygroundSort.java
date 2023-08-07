@@ -31,7 +31,7 @@ final public class PlaygroundSort extends Sort {
         for (int j = 0; j < length; j++) {
             Highlights.markArray(2, j);
             Delays.sleep(0.005);
-            if (Reads.compareIndices(array, j, lowestindex, 0.5, true) == -1) {
+            if (Reads.compareValues(array[j], array[lowestindex]) == -1){
                 lowestindex = j;
                 Highlights.markArray(1, lowestindex);
                 Delays.sleep(0.005);
@@ -47,15 +47,13 @@ final public class PlaygroundSort extends Sort {
             Highlights.markArray(1, target);
             Highlights.markArray(2, right);
             Delays.sleep(0.005);
-            if (Reads.compareIndices(array, target, right, 0.5, true) < 0) {
-                if (lowesthigh == -1)
-                    lowesthigh = right;
+            if (Reads.compareValues(array[target], array[right]) < 0) {
+                if (lowesthigh == -1) lowesthigh = right;
                 else {
                     Highlights.markArray(1, lowesthigh);
                     Highlights.markArray(2, right);
                     Delays.sleep(0.005);
-                    if (Reads.compareIndices(array, lowesthigh, right, 0.5, true) > 0)
-                        lowesthigh = right;
+                    if (Reads.compareValues(array[lowesthigh], array[right]) > 0) lowesthigh = right;
                 }
             }
             right++;
@@ -67,10 +65,8 @@ final public class PlaygroundSort extends Sort {
         int dir = 0;
         int chase = 0;
         if (Math.abs(target - item) != 1) {
-            if (target - item > 0)
-                dir = 1;
-            else
-                dir = -1;
+            if (target - item > 0) dir = 1;
+            else dir = -1;
             chase = item;
             while (Math.abs(target - chase) != 1) {
                 Writes.swap(array, chase, chase + dir, 0.005, true, false);
@@ -100,8 +96,7 @@ final public class PlaygroundSort extends Sort {
                 if (target != -1) {
                     chase(array, lasttarget, target);
                     lasttarget = target;
-                } else
-                    quit(array, bound, lasttarget);
+                } else quit(array, bound, lasttarget);
             }
             bound--;
         }

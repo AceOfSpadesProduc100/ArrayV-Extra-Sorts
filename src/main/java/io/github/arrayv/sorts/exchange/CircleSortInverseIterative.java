@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /*
@@ -12,18 +13,10 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
+@SortMeta(name = "Circle (Iterative, Inverse)")
 final public class CircleSortInverseIterative extends Sort {
     public CircleSortInverseIterative(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("Circle (Inverse Iterative)");
-        this.setRunAllSortsName("Inverse Iterative Circle Sort");
-        this.setRunSortName("Inverse Iterative Circlesort");
-        this.setCategory("Exchange Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     protected boolean circle(int[] array, int a, int b, boolean anyswaps) {

@@ -1,1 +1,0 @@
-package sorts.misc;public class NoSort extends sorts.templates.Sort{public NoSort(main.ArrayVisualizer a){super(a);setSortListName("Shuffle Test");setRunAllSortsName(" ");setRunSortName(" ");setCategory("Tests");}public void runSort(int[]a,int b,int c){}}

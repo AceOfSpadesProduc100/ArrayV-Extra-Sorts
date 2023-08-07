@@ -1,6 +1,7 @@
 package io.github.arrayv.sorts.hybrid;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.insert.InsertionSort;
 import io.github.arrayv.sorts.select.MaxHeapSort;
 import io.github.arrayv.sorts.templates.Sort;
@@ -19,19 +20,11 @@ Coded for ArrayV by Kiriko-chan
  * @author Kiriko-chan
  *
  */
+@SortMeta(name = "Median-of-Medians Ternary Quick")
 public final class MOMTernaryQuickSort extends Sort {
 
     public MOMTernaryQuickSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("MOM Ternary Quick");
-        this.setRunAllSortsName("Median-of-Medians Ternary Quick Sort");
-        this.setRunSortName("Median-of-Medians Ternary Quicksort");
-        this.setCategory("Hybrid Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     class PivotPair {

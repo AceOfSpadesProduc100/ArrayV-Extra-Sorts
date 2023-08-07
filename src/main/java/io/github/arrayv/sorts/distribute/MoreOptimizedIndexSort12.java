@@ -3,6 +3,7 @@ package io.github.arrayv.sorts.distribute;
 import java.math.BigInteger;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
 /**************************************
@@ -16,20 +17,10 @@ import io.github.arrayv.sorts.templates.Sort;
  * 
  * @author Distay *
  **************************************/
-
+@SortMeta(name = "More Optimized Index v1.2")
 final public class MoreOptimizedIndexSort12 extends Sort {
     public MoreOptimizedIndexSort12(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("More Optimized Index (v1.2)");
-        this.setRunAllSortsName("More Optimized Index Sort (Newer)");
-        this.setRunSortName("More Optimized Indexsort (v1.2)");
-        this.setCategory("Optimal Sorts");
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     private BigInteger bitlist;

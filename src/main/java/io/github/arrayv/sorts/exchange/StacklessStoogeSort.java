@@ -1,21 +1,13 @@
 package io.github.arrayv.sorts.exchange;
 
 import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
 import io.github.arrayv.sorts.templates.Sort;
 
+@SortMeta(name = "Stackless Stooge", unreasonableLimit = 256, slowSort = true, category = "Impractical Sorts")
 final public class StacklessStoogeSort extends Sort {
 	public StacklessStoogeSort(ArrayVisualizer arrayVisualizer) {
 		super(arrayVisualizer);
-
-		this.setSortListName("Stackless Stooge");
-		this.setRunAllSortsName("Stackless Stooge Sort");
-		this.setRunSortName("Stackless Stoogesort");
-		this.setCategory("Impractical Sorts");
-		this.setBucketSort(false);
-		this.setRadixSort(false);
-		this.setUnreasonablySlow(true);
-		this.setUnreasonableLimit(256);
-		this.setBogoSort(false);
 	}
 
 	// equivalent to (ternary) (v & (1 << s)) >> s

@@ -1,38 +1,29 @@
-package sorts.insert;
+package io.github.arrayv.sorts.insert;
 
 import java.util.Comparator;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sortdata.SortMeta;
+import io.github.arrayv.sorts.templates.Sort;
 
+@SortMeta(name = "Branchless Binary Insertion")
 final public class BranchlessBinaryInsertionSort extends Sort {
     public BranchlessBinaryInsertionSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-
-        this.setSortListName("Branchless Binary Insert");
-        this.setRunAllSortsName("Branchless Binary Insertion Sort");
-        this.setRunSortName("Branchless Binary Insertsort");
-        this.setCategory("Insertion Sorts");
-        this.setComparisonBased(true);
-        this.setBucketSort(false);
-        this.setRadixSort(false);
-        this.setUnreasonablySlow(false);
-        this.setUnreasonableLimit(0);
-        this.setBogoSort(false);
     }
 
     private int sign(int v) {
-        return (v>>31) | -(-v>>31);
+        return (v >> 31) | -(-v >> 31);
     }
 
     private int binsearch(int[] array, int start, int end, int key, double slp, Comparator<Integer> bcmp) {
-        while(end-start > 0) {
+        while (end - start > 0) {
             int l = end - start,
-                c = bcmp.compare(key, array[start+l/2]); // branchless compare here
-            Highlights.markArray(1, start+l/2);
+                    c = bcmp.compare(key, array[start + l / 2]); // branchless compare here
+            Highlights.markArray(1, start + l / 2);
             Delays.sleep(slp);
-            start += ((l / 2) + 1) * sign(c+1);
-            end -= ((l + 1) / 2) * -sign(c-1);
+            start += ((l / 2) + 1) * sign(c + 1);
+            end -= ((l + 1) / 2) * -sign(c - 1);
         }
         Highlights.clearAllMarks();
         return start;
@@ -45,12 +36,11 @@ final public class BranchlessBinaryInsertionSort extends Sort {
 
             int j = i - 1;
 
-            while (j >= src)
-            {
+            while (j >= src) {
                 Writes.write(array, j + 1, array[j], writeSleep, true, false);
                 j--;
             }
-            if(src < i)
+            if (src < i)
                 Writes.write(array, src, num, writeSleep, true, false);
 
             Highlights.clearAllMarks();

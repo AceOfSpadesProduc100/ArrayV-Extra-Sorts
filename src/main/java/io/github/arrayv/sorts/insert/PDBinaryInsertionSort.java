@@ -1,7 +1,7 @@
-package sorts.insert;
+package io.github.arrayv.sorts.insert;
 
-import main.ArrayVisualizer;
-import sorts.templates.Sort;
+import io.github.arrayv.main.ArrayVisualizer;
+import io.github.arrayv.sorts.templates.Sort;
 
 /*
 
@@ -12,15 +12,14 @@ CODED FOR ARRAYV BY PCBOYGAMES
 ------------------------------
 
 */
-public final class InRunBinaryInsertionSort extends Sort {
+public final class PDBinaryInsertionSort extends Sort {
 
-    public InRunBinaryInsertionSort(ArrayVisualizer arrayVisualizer) {
+    public PDBinaryInsertionSort(ArrayVisualizer arrayVisualizer) {
         super(arrayVisualizer);
-        this.setSortListName("In-Run Binary Insertion");
-        this.setRunAllSortsName("In-Run Binary Insertion Sort");
-        this.setRunSortName("In-Run Binary Insertsort");
+        this.setSortListName("Pattern-Defeating Binary Insertion");
+        this.setRunAllSortsName("Pattern-Defeating Binary Insertion Sort");
+        this.setRunSortName("Pattern-Defeating Binary Insertsort");
         this.setCategory("Insertion Sorts");
-        this.setComparisonBased(true);
         this.setBucketSort(false);
         this.setRadixSort(false);
         this.setUnreasonablySlow(false);
@@ -49,13 +48,14 @@ public final class InRunBinaryInsertionSort extends Sort {
     protected int pd(int[] array, int start, int end, double delay, boolean aux) {
         int forward = start;
         int cmp = Reads.compareIndices(array, forward, forward + 1, delay, true);
+        boolean lessunique = false;
         while (cmp <= 0 && forward + 1 < end) {
             forward++;
+            if (cmp == 0) lessunique = true;
             if (forward + 1 < end) cmp = Reads.compareIndices(array, forward, forward + 1, delay, true);
         }
-        int reverse = forward == start ? start + 1 : start;
+        int reverse = start;
         if (forward == start) {
-            boolean lessunique = false;
             boolean different = false;
             cmp = Reads.compareIndices(array, reverse, reverse + 1, delay, true);
             while (cmp >= 0 && reverse + 1 < end) {
@@ -64,9 +64,9 @@ public final class InRunBinaryInsertionSort extends Sort {
                 reverse++;
                 if (reverse + 1 < end) cmp = Reads.compareIndices(array, reverse, reverse + 1, delay, true);
             }
-            if (reverse > 0) {
-                if (lessunique && different) stableSegmentReversal(array, start, reverse, delay, aux);
-                else if (reverse < 3) Writes.swap(array, start, reverse, delay, true, aux);
+            if (reverse > start && different) {
+                if (lessunique) stableSegmentReversal(array, start, reverse, delay, aux);
+                else if (reverse < start + 3) Writes.swap(array, start, reverse, delay, true, aux);
                 else Writes.reversal(array, start, reverse, delay, true, aux);
             }
         }
@@ -87,32 +87,26 @@ public final class InRunBinaryInsertionSort extends Sort {
         return a;
     }
 
-    public void irbinsert(int[] array, int start, int end, double delay, boolean dopd, boolean aux) {
-        int pattern = start;
-        if (dopd) pattern = pd(array, start, end, delay, aux);
+    public void pdbinsert(int[] array, int start, int end, double delay, boolean aux) {
+        int pattern = pd(array, start, end, delay, aux);
         Highlights.clearAllMarks();
         for (int i = pattern + 1; i < end; i++) {
-            if (Reads.compareValues(array[i - 1], array[i]) > 0) {
-                int item = array[i];
-                int left = binarySearch(array, start, i - 1, item, delay);
-                Highlights.clearAllMarks();
-                Highlights.markArray(2, left);
-                boolean w = false;
-                for (int right = i; right > left; right--) {
-                    Writes.write(array, right, array[right - 1], delay / 20, true, aux);
-                    w = true;
-                }
-                if (w) Writes.write(array, left, item, delay, true, aux);
-                Highlights.clearAllMarks();
-            } else {
-                Highlights.markArray(1, i);
-                Delays.sleep(delay);
+            int item = array[i];
+            int left = binarySearch(array, start, i, item, delay);
+            Highlights.clearAllMarks();
+            Highlights.markArray(2, left);
+            boolean w = false;
+            for (int right = i; right > left; right--) {
+                Writes.write(array, right, array[right - 1], delay / 20, true, aux);
+                w = true;
             }
+            if (w) Writes.write(array, left, item, delay, true, aux);
+            Highlights.clearAllMarks();
         }
     }
 
     @Override
     public void runSort(int[] array, int currentLength, int constantdiv) throws Exception {
-        irbinsert(array, 0, currentLength, 1, true, false);
+        pdbinsert(array, 0, currentLength, 1, false);
     }
 }
